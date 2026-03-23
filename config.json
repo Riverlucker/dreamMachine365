@@ -1,7 +1,7 @@
 {
   "auth": {
     "host": "odds-feed.p.rapidapi.com",
-    "rapid_key": "438d69cc0fmsh72d693af17abf94p12d073jsnb1bede863f7f",
+    "rapid_key": "DEIN_KEY_KOMMT_IN_STREAMLIT_SECRETS",
     "portal_key": "*****"
   },
   "settings": {
