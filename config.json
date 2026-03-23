@@ -1,0 +1,61 @@
+{
+  "auth": {
+    "host": "odds-feed.p.rapidapi.com",
+    "rapid_key": "438d69cc0fmsh72d693af17abf94p12d073jsnb1bede863f7f",
+    "portal_key": "*****"
+  },
+  "settings": {
+    "output_mode": "MOBILE"
+  },
+  "request_params": {
+    "sport_ids": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "event_limit_per_sport": 999,
+    "max_pages_per_sport": 4,
+    "max_days_ahead": 3,
+    "status_filter": "SCHEDULED"
+  },
+  "golden_thresholds": {
+    "min_main_volume": 1000,
+    "min_market_books": 3,
+    "max_combined_overround": 2.0,
+    "required_bookie_best_price": "BET365",
+    "allowed_bookie_odds_drop_pct": 3,
+    "price_range": [
+      1.3,
+      5.0
+    ],
+    "require_half_handicap_over_under": true,
+    "last_update_hours_ago": 3,
+    "ignored_markets": []
+  },
+  "market_mappings": {
+    "1X2": [
+      "HOME",
+      "DRAW",
+      "AWAY"
+    ],
+    "HOME_AWAY": [
+      "HOME",
+      "AWAY"
+    ],
+    "ASIAN_HANDICAP": [
+      "HOME",
+      "AWAY"
+    ],
+    "OVER_UNDER": [
+      "OVER",
+      "UNDER"
+    ],
+    "DEFAULT": [
+      "OUT_0",
+      "OUT_1",
+      "OUT_2"
+    ]
+  }
+}
