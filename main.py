@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import json
 import os
+import subprocess
 from datetime import datetime, timedelta
 
 
@@ -232,13 +233,30 @@ class OddsFeedClient:
                 "Link": st.column_config.LinkColumn("Event Link")
             })
 
+def get_last_update_date():
+    try:
+        # Versucht das Datum des letzten Git-Commits auszulesen
+        result = subprocess.run(['git', 'log', '-1', '--format=%cd', '--date=format:%Y-%m-%d %H:%M'], 
+                                capture_output=True, text=True, check=True)
+        return result.stdout.strip()
+    except:
+        try:
+            # Fallback auf Datei-Änderungsdatum
+            mtime = os.path.getmtime(__file__)
+            return datetime.fromtimestamp(mtime).strftime('%Y-%m-%d %H:%M')
+        except:
+            return "Unknown"
+
 def main():
-    st.set_page_config(page_title="Fussball Analytics App", page_icon="⚽", layout="wide")
-    st.title("⚽ Fussball Analytics App")
+    st.set_page_config(page_title="DreamMachine365", page_icon="⚽", layout="wide")
+    st.title("⚽ DreamMachine365")
     
-    st.markdown("Fetch the latest betting opportunities from the Odds Feed API.")
+    version_date = get_last_update_date()
+    st.caption(f"Version: {version_date}")
     
-    if st.button("Fetch Opportunities", type="primary"):
+    st.markdown("Go big or go home")
+    
+    if st.button("Start Dreaming", type="primary"):
         with st.spinner("Fetching data from API..."):
             client = OddsFeedClient()
             client.run()
