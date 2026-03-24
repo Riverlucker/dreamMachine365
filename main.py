@@ -3,6 +3,7 @@ import requests
 import json
 import os
 import subprocess
+import urllib.parse
 from datetime import datetime, timedelta
 
 
@@ -90,8 +91,8 @@ class OddsFeedClient:
         if label == "AWAY": return away
         return label
 
-    def run(self):
-        thresholds = self.config['golden_thresholds']
+    def run(self, override_thresholds=None):
+        thresholds = override_thresholds if override_thresholds else self.config['golden_thresholds']
         params = self.config['request_params']
         ignored = [m.upper() for m in thresholds.get('ignored_markets', [])]
         results = []
@@ -214,9 +215,24 @@ class OddsFeedClient:
             st.info("No opportunities found matching your criteria.")
             return
 
+        import re
+        def extract_search_term(team_name):
+            words = [w for w in re.split(r'[\s.,]+', team_name) if w]
+            return max(words, key=len) if words else ""
+
         df_data = []
         for res in results:
             link = f"https://oddsfe.com/events/{res['id']}?mt={res['raw_market']}&live=False"
+            parts = res['match'].split(" vs ")
+            home_team = parts[0].strip() if len(parts) > 0 else ""
+            away_team = parts[1].strip() if len(parts) > 1 else ""
+            
+            home_term = extract_search_term(home_team)
+            away_term = extract_search_term(away_team)
+            
+            b365_search_home = f"https://www.bet365.com/#/AX/K%5E{urllib.parse.quote(home_term)}/" if home_term else ""
+            b365_search_away = f"https://www.bet365.com/#/AX/K%5E{urllib.parse.quote(away_term)}/" if away_term else ""
+            
             df_data.append({
                 "Date": res['date'],
                 "Sport": res['sport'],
@@ -225,12 +241,16 @@ class OddsFeedClient:
                 "Bookie Info": res['b365_info'],
                 "Ovr %": f"{res['ovr']:.2f}%",
                 "Updated": res['change_time'],
-                "Link": link
+                "Event Link": link,
+                "B365 Home": b365_search_home,
+                "B365 Away": b365_search_away
             })
             
         if df_data:
             st.dataframe(df_data, use_container_width=True, column_config={
-                "Link": st.column_config.LinkColumn("Event Link")
+                "Event Link": st.column_config.LinkColumn("Oddsfe", display_text="🔗 Oddsfe"),
+                "B365 Home": st.column_config.LinkColumn("B365 Home", display_text="🔗 B365 Home"),
+                "B365 Away": st.column_config.LinkColumn("B365 Away", display_text="🔗 B365 Away")
             })
 
 def get_last_update_date():
@@ -249,7 +269,51 @@ def get_last_update_date():
 
 def main():
     st.set_page_config(page_title="DreamMachine365", page_icon="⚽", layout="wide")
-    st.title("⚽ DreamMachine365")
+    
+    # Load default golden thresholds
+    try:
+        with open('config.json', 'r') as f:
+            base_config = json.load(f)
+        def_thr = base_config.get('golden_thresholds', {})
+    except:
+        def_thr = {}
+        
+    st.sidebar.header("🎯 Filter Settings")
+    st.sidebar.markdown("Passe hier die Suchkriterien an:")
+    
+    with st.sidebar.form("thresholds_form"):
+        min_main_volume = st.number_input("Min Main Volume", value=float(def_thr.get("min_main_volume", 1000.0)), step=100.0)
+        min_market_books = st.number_input("Min Market Books", value=int(def_thr.get("min_market_books", 5)), min_value=1)
+        max_combined_overround = st.number_input("Max Combined Overround (%)", value=float(def_thr.get("max_combined_overround", 2.0)), step=0.1)
+        required_bookie = st.text_input("Required Bookie", value=def_thr.get("required_bookie_best_price", "BET365"))
+        allowed_drop_pct = st.number_input("Allowed Odds Drop %", value=float(def_thr.get("allowed_bookie_odds_drop_pct", 3.0)), step=0.5)
+        
+        pr_default = def_thr.get("price_range", [1.3, 5.0])
+        col1, col2 = st.columns(2)
+        with col1: min_price = st.number_input("Min Price", value=float(pr_default[0]), step=0.1)
+        with col2: max_price = st.number_input("Max Price", value=float(pr_default[1]), step=0.1)
+        
+        req_half_hc = st.checkbox("Require Half-Handicap for O/U", value=bool(def_thr.get("require_half_handicap_over_under", True)))
+        last_update = st.number_input("Max Update Age (Hours)", value=float(def_thr.get("last_update_hours_ago", 3.0)), step=1.0)
+        
+        ignored_str = ", ".join(def_thr.get("ignored_markets", []))
+        ignored_input = st.text_input("Ignored Markets (kommagetrennt)", value=ignored_str)
+        
+        st.form_submit_button("Parameter bestätigen")
+
+    dynamic_thresholds = {
+        "min_main_volume": min_main_volume,
+        "min_market_books": min_market_books,
+        "max_combined_overround": max_combined_overround,
+        "required_bookie_best_price": required_bookie.strip(),
+        "allowed_bookie_odds_drop_pct": allowed_drop_pct,
+        "price_range": [min_price, max_price],
+        "require_half_handicap_over_under": req_half_hc,
+        "last_update_hours_ago": last_update,
+        "ignored_markets": [m.strip() for m in ignored_input.split(",") if m.strip()]
+    }
+
+    st.title("⚽🎾🏀⚾🏒 DreamMachine365")
     
     version_date = get_last_update_date()
     st.caption(f"Version: {version_date}")
@@ -257,9 +321,12 @@ def main():
     st.markdown("Go big or go home")
     
     if st.button("Start Dreaming", type="primary"):
+        st.subheader("Verwendete Parameter (Golden Thresholds):")
+        st.json(dynamic_thresholds)
+        
         with st.spinner("Fetching data from API..."):
             client = OddsFeedClient()
-            client.run()
+            client.run(override_thresholds=dynamic_thresholds)
 
 if __name__ == "__main__":
     main()
