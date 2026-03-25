@@ -8,7 +8,9 @@ from datetime import datetime, timedelta
 
 
 class OddsFeedClient:
-    def __init__(self, config_path='config.json'):
+    def __init__(self, config_path=None):
+        if config_path is None:
+            config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.json')
         self.config = self._load_config(config_path)
         auth = self.config['auth']
         self.host = auth['host']
@@ -272,7 +274,8 @@ def main():
     
     # Load default golden thresholds
     try:
-        with open('config.json', 'r') as f:
+        config_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'config.json')
+        with open(config_path, 'r') as f:
             base_config = json.load(f)
         def_thr = base_config.get('golden_thresholds', {})
     except:
