@@ -6,6 +6,4 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'dre
 
 # Importiert und startet effektiv dreammachine/main.py
 import main as dm_main
-
-if __name__ == '__main__':
-    dm_main.main()
+dm_main.main()
