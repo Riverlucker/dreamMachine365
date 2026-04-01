@@ -117,8 +117,16 @@ class OddsFeedClient:
                 eid, home, away = event.get('id'), event.get('team_home', {}).get('name', 'N/A'), event.get('team_away',
                                                                                                             {}).get(
                     'name', 'N/A')
-                sport_name, date_str = event.get('sport', {}).get('name', 'Sport'), event.get('start_at', 'N/A')
-
+                sport_name = event.get('sport', {}).get('name', 'Sport')
+                date_str = event.get('start_at', 'N/A')
+                offset_h = thresholds.get("time_offset_hours", 2.0)
+                if date_str != 'N/A':
+                    try:
+                        dt = datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S")
+                        dt += timedelta(hours=offset_h)
+                        date_str = dt.strftime("%Y-%m-%d %H:%M:%S")
+                    except:
+                        pass
                 market_data = self.get_event_markets(eid)
                 if not market_data or 'data' not in market_data: continue
 
@@ -150,6 +158,11 @@ class OddsFeedClient:
                         if b.get('is_open') is False: continue
                         
                         o0, o1, o2 = b.get('outcome_0'), b.get('outcome_1'), b.get('outcome_2')
+
+                        if sport_name.upper() == 'BASKETBALL' and m_name == 'OVER_UNDER' and 'BET365' in b.get('book', 'UNK').upper():
+                            if o0 == 1.91: o0 = 1.87
+                            if o1 == 1.91: o1 = 1.87
+                            if o2 == 1.91: o2 = 1.87
 
                         if o0 and o0 > max_o0: max_o0 = o0
                         if o1 and o1 > max_o1: max_o1 = o1
@@ -298,6 +311,7 @@ def main():
         
         req_half_hc = st.checkbox("Require Half-Handicap for O/U", value=bool(def_thr.get("require_half_handicap_over_under", True)))
         last_update = st.number_input("Max Update Age (Hours)", value=float(def_thr.get("last_update_hours_ago", 3.0)), step=1.0)
+        time_offset = st.number_input("Time Offset (Hours)", value=float(def_thr.get("time_offset_hours", 2.0)), step=1.0)
         
         ignored_str = ", ".join(def_thr.get("ignored_markets", []))
         ignored_input = st.text_input("Ignored Markets (kommagetrennt)", value=ignored_str)
@@ -313,6 +327,7 @@ def main():
         "price_range": [min_price, max_price],
         "require_half_handicap_over_under": req_half_hc,
         "last_update_hours_ago": last_update,
+        "time_offset_hours": time_offset,
         "ignored_markets": [m.strip() for m in ignored_input.split(",") if m.strip()]
     }
 
