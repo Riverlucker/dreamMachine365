@@ -21,14 +21,14 @@
     "status_filter": "SCHEDULED"
   },
   "golden_thresholds": {
-    "min_main_volume": 1000,
+    "min_main_volume": 800,
     "min_market_books": 3,
     "max_combined_overround": 2.0,
     "required_bookie_best_price": "BET365",
     "allowed_bookie_odds_drop_pct": 3,
     "price_range": [
-      1.3,
-      5.0
+      1.25,
+      10
     ],
     "require_half_handicap_over_under": true,
     "last_update_hours_ago": 3,
