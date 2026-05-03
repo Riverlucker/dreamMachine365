@@ -282,6 +282,41 @@ def get_last_update_date():
         except:
             return "Unknown"
 
+@st.cache_resource
+def get_rate_limit_history():
+    return []
+
+def check_rate_limit(config):
+    limits = config.get("rate_limits", {})
+    if not limits:
+        return True, ""
+    
+    history = get_rate_limit_history()
+    now = datetime.now()
+    
+    # clean up old history (> 1 day)
+    while history and (now - history[0]).total_seconds() > 86400:
+        history.pop(0)
+    
+    # count recent
+    last_min = sum(1 for t in history if (now - t).total_seconds() <= 60)
+    last_30m = sum(1 for t in history if (now - t).total_seconds() <= 1800)
+    last_day = len(history)
+    
+    limit_min = limits.get("per_minute", 5)
+    limit_30m = limits.get("per_half_hour", 30)
+    limit_day = limits.get("per_day", 100)
+    
+    if last_min >= limit_min:
+        return False, f"Rate limit exceeded: Max {limit_min} requests per minute allowed."
+    if last_30m >= limit_30m:
+        return False, f"Rate limit exceeded: Max {limit_30m} requests per 30 minutes allowed."
+    if last_day >= limit_day:
+        return False, f"Rate limit exceeded: Max {limit_day} requests per day allowed."
+        
+    history.append(now)
+    return True, ""
+
 def main():
     st.set_page_config(page_title="DreamMachine365", page_icon="⚽", layout="wide")
     
@@ -292,6 +327,7 @@ def main():
             base_config = json.load(f)
         def_thr = base_config.get('golden_thresholds', {})
     except:
+        base_config = {}
         def_thr = {}
         
     st.sidebar.header("🎯 Filter Settings")
@@ -339,6 +375,11 @@ def main():
     st.markdown("Go big or go home")
     
     if st.button("Start Dreaming", type="primary"):
+        is_allowed, error_msg = check_rate_limit(base_config)
+        if not is_allowed:
+            st.error(error_msg)
+            return
+
         st.subheader("Verwendete Parameter (Golden Thresholds):")
         st.json(dynamic_thresholds)
         

@@ -7,6 +7,11 @@
   "settings": {
     "output_mode": "MOBILE"
   },
+  "rate_limits": {
+    "per_minute": 5,
+    "per_half_hour": 30,
+    "per_day": 100
+  },
   "request_params": {
     "sport_ids": [
       "1",
