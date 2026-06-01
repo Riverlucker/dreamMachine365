@@ -8,8 +8,8 @@
     "output_mode": "MOBILE"
   },
   "rate_limits": {
-    "per_minute": 5,
-    "per_half_hour": 30,
+    "per_minute": 2,
+    "per_half_hour": 10,
     "per_day": 100
   },
   "request_params": {
@@ -26,7 +26,7 @@
     "status_filter": "SCHEDULED"
   },
   "golden_thresholds": {
-    "min_main_volume": 800,
+    "min_main_volume": 799,
     "min_market_books": 3,
     "max_combined_overround": 2.0,
     "required_bookie_best_price": "BET365",
