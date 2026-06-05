@@ -23,6 +23,7 @@ const elements = {
 
 let config = null;
 let drawSequence = [];
+let isDrawing = false;
 let currentStep = 0;
 let timerInterval = null;
 let rouletteInterval = null;
@@ -189,6 +190,9 @@ function renderTeams() {
 }
 
 async function startDrawProcess(isReplay = false) {
+    if (isDrawing) return;
+    isDrawing = true;
+    
     elements.stageIdle.classList.add('hidden');
     elements.stageFinished.classList.add('hidden');
     elements.stageActive.classList.remove('hidden');
@@ -336,6 +340,7 @@ function addPlayerToTeam(stepData) {
 }
 
 function finishDraw() {
+    isDrawing = false;
     elements.stageActive.classList.add('hidden');
     elements.stageFinished.classList.remove('hidden');
     document.querySelectorAll('.pot-item').forEach(el => el.classList.remove('active'));
@@ -351,6 +356,8 @@ function showReplayPrompt() {
 }
 
 function showFinishedState() {
+    if (isDrawing) return;
+    
     elements.stageIdle.classList.add('hidden');
     elements.stageActive.classList.add('hidden');
     elements.stageFinished.classList.remove('hidden');
