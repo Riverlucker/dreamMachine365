@@ -183,6 +183,6 @@ else:
         )
 
         # Render the custom iframe
-        st.components.v1.html(html_content, height=650, scrolling=True)
+        st.components.v1.html(html_content, height=1200, scrolling=True)
     else:
         st.error("HTML/CSS/JS Dateien der Visualisierung wurden nicht gefunden.")

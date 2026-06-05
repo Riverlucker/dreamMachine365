@@ -30,49 +30,49 @@
       "id": "p2",
       "name": "Martin Baumgartner",
       "team_id": "team_white",
-      "handicap": 5.6
+      "handicap": 5.8
     },
     {
       "id": "p3",
       "name": "David Baumgartner",
       "team_id": "team_white",
-      "handicap": 13.4
+      "handicap": 12.9
     },
     {
       "id": "p4",
       "name": "Florian Haas",
       "team_id": "team_white",
-      "handicap": 10.3
+      "handicap": 9.7
     },
     {
       "id": "p5",
       "name": "Gustavo Salzar",
       "team_id": "team_blue",
-      "handicap": 9.6
+      "handicap": 9.7
     },
     {
       "id": "p6",
       "name": "Johannes Pfeil",
       "team_id": "team_blue",
-      "handicap": 11.2
+      "handicap": 11.0
     },
     {
       "id": "p7",
       "name": "Markus Möllinger",
       "team_id": "team_blue",
-      "handicap": 18.5
+      "handicap": 19.4
     },
     {
       "id": "p8",
       "name": "Norbert Hofmann",
       "team_id": "team_blue",
-      "handicap": 14.3
+      "handicap": 14.1
     },
     {
       "id": "p9",
       "name": "Patrick Schreiber",
       "team_id": "team_black",
-      "handicap": 0.9
+      "handicap": 1.2
     },
     {
       "id": "p10",
@@ -130,7 +130,7 @@
     },
     "p2": {
       "altentann": 7,
-      "eugendorf": 7,
+      "eugendorf": 8,
       "gc_blue": 8,
       "gc_green": 8,
       "gc_red": 8,
@@ -140,8 +140,8 @@
       "tclub_palma": 8
     },
     "p3": {
-      "altentann": 16,
-      "eugendorf": 17,
+      "altentann": 15,
+      "eugendorf": 16,
       "gc_blue": 15,
       "gc_green": 15,
       "gc_red": 15,
@@ -152,7 +152,7 @@
     },
     "p4": {
       "altentann": 12,
-      "eugendorf": 13,
+      "eugendorf": 12,
       "gc_blue": 12,
       "gc_green": 12,
       "gc_red": 12,
@@ -184,15 +184,15 @@
       "tclub_palma": 13
     },
     "p7": {
-      "altentann": 22,
-      "eugendorf": 23,
-      "gc_blue": 20,
-      "gc_green": 20,
-      "gc_red": 20,
+      "altentann": 23,
+      "eugendorf": 24,
+      "gc_blue": 21,
+      "gc_green": 21,
+      "gc_red": 21,
       "klessheim": 20,
-      "son_gual": 20,
-      "tclub_calvia": 20,
-      "tclub_palma": 20
+      "son_gual": 21,
+      "tclub_calvia": 21,
+      "tclub_palma": 21
     },
     "p8": {
       "altentann": 17,
