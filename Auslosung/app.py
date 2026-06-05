@@ -63,10 +63,15 @@ else:
             unsafe_allow_html=True
         )
         
-        # Show a button to trigger the draw (forces it)
-        col1, col2, col3 = st.columns([1, 2, 1])
-        with col2:
-            force_draw = st.button("Jetzt auslosen 🎲", type="primary", use_container_width=True)
+        # Show admin options to hide the manual draw trigger button
+        show_admin = st.checkbox("Admin-Optionen anzeigen")
+        force_draw = False
+        if show_admin:
+            pwd = st.text_input("Admin-Passwort:", type="password")
+            if pwd == "admin":
+                force_draw = st.button("Jetzt auslosen 🎲", type="primary", use_container_width=True)
+            elif pwd:
+                st.error("Falsches Passwort!")
 
         if force_draw or now >= scheduled_time:
             pots = copy.deepcopy(draw_config.get("pots", []))

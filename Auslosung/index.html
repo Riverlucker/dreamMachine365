@@ -29,16 +29,7 @@
         </header>
 
         <main class="layout-grid">
-            <aside class="sidebar pots-sidebar">
-                <div class="glass-panel">
-                    <h2>Lostöpfe</h2>
-                    <div id="pots-container" class="pots-list">
-                        <!-- Pots will be injected here -->
-                    </div>
-                </div>
-            </aside>
-
-            <section class="main-content draw-section">
+            <section class="main-content draw-section full-width">
                 <div id="draw-stage" class="glass-panel stage-panel">
                     <div id="stage-idle" class="stage-content">
                         <h3 id="idle-title">Warten auf Start...</h3>
@@ -77,7 +68,16 @@
                 </div>
             </section>
 
-            <section class="teams-section full-width">
+            <aside class="sidebar pots-sidebar">
+                <div class="glass-panel">
+                    <h2>Lostöpfe</h2>
+                    <div id="pots-container" class="pots-list">
+                        <!-- Pots will be injected here -->
+                    </div>
+                </div>
+            </aside>
+
+            <section class="teams-section">
                 <div class="glass-panel">
                     <h2>Teams</h2>
                     <div id="teams-container" class="teams-grid">
