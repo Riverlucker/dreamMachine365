@@ -108,6 +108,12 @@ body {
     width: 100%;
 }
 
+.draw-section {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
 /* Header */
 .main-header .header-content {
     display: flex;
@@ -456,6 +462,25 @@ h2 {
 
 @media (max-width: 900px) {
     .pots-and-teams {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+    }
+    .teams-grid {
         grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .container {
+        padding: 0.5rem;
+    }
+    .glass-panel {
+        padding: 0.5rem;
+    }
+    .player-chip, .team-player-row {
+        font-size: 0.75rem;
+        padding: 0.3rem;
+    }
+    h2 {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
     }
 }
