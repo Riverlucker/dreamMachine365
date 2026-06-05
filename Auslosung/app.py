@@ -63,13 +63,14 @@ else:
         seed_string = f"{draw_id}_{draw_config.get('scheduled_time', '')}"
         seed_val = int(hashlib.md5(seed_string.encode()).hexdigest(), 16)
         
-        random.seed(seed_val)
+        # Use a local Random instance to avoid thread-safety issues in Streamlit
+        rng = random.Random(seed_val)
         pots_temp = copy.deepcopy(draw_config.get("pots", []))
         teams_temp = draw_config.get("teams", [])
         pre_sequence = []
         for pot_idx, pot in enumerate(pots_temp):
             players = pot.get("players", [])
-            random.shuffle(players)
+            rng.shuffle(players)
             ordered_teams = list(teams_temp)
             for i, player in enumerate(players):
                 pre_sequence.append({
@@ -79,7 +80,6 @@ else:
                     "isLastInPot": (i == len(players) - 1),
                     "potDrawIndex": pot_idx + 1
                 })
-        random.seed() # reset
 
         if force_draw or (now >= scheduled_time and not st.session_state.get('results_deleted', False)):
             draw_sequence = pre_sequence
