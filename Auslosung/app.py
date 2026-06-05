@@ -115,7 +115,8 @@ else:
                     st.warning(f"Konnte Teams nicht automatisch ins Scoring übertragen: {e}")
             
             existing_results = results_data
-            st.session_state['trigger_autoplay'] = True
+            if force_draw:
+                st.session_state['trigger_autoplay'] = True
             st.success("Auslosung erfolgreich generiert!")
             st.rerun()
     else:
