@@ -9,7 +9,7 @@ from datetime import datetime
 st.set_page_config(
     page_title="Auslosung - 45-Loch Challenge",
     page_icon="🎲",
-    layout="centered"
+    layout="wide"
 )
 
 st.markdown("<h1 style='text-align: center; color: #f1cf6d;'>🎲 Auslosung der Teams</h1>", unsafe_allow_html=True)
