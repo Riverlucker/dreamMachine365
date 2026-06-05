@@ -28,7 +28,7 @@
         {
           "id": "p9",
           "name": "Patrick Schreiber",
-          "handicap": 1.2
+          "handicap": 0.9
         },
         {
           "id": "p12",
@@ -38,7 +38,7 @@
         {
           "id": "p2",
           "name": "Martin Baumgartner",
-          "handicap": 5.8
+          "handicap": 5.6
         }
       ]
     },
@@ -47,19 +47,19 @@
       "name": "Lostopf 2",
       "players": [
         {
-          "id": "p4",
-          "name": "Florian Haas",
-          "handicap": 9.7
-        },
-        {
           "id": "p5",
           "name": "Gustavo Salzar",
-          "handicap": 9.7
+          "handicap": 9.6
+        },
+        {
+          "id": "p4",
+          "name": "Florian Haas",
+          "handicap": 10.3
         },
         {
           "id": "p6",
           "name": "Johannes Pfeil",
-          "handicap": 11.0
+          "handicap": 11.2
         }
       ]
     },
@@ -75,7 +75,7 @@
         {
           "id": "p3",
           "name": "David Baumgartner",
-          "handicap": 12.9
+          "handicap": 13.4
         },
         {
           "id": "p11",
@@ -91,12 +91,12 @@
         {
           "id": "p8",
           "name": "Norbert Hofmann",
-          "handicap": 14.1
+          "handicap": 14.3
         },
         {
           "id": "p7",
           "name": "Markus Möllinger",
-          "handicap": 19.4
+          "handicap": 18.5
         },
         {
           "id": "p10",
