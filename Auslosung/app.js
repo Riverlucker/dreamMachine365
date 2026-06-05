@@ -117,12 +117,7 @@ function startTimer(scheduledTime) {
         if (diff <= 0) {
             clearInterval(timerInterval);
             elements.countdown.innerText = "00:00:00";
-            if (!window.isStreamlit) {
-                startDrawProcess();
-            } else {
-                elements.idleTitle.innerText = "Bereit für die Auslosung!";
-                elements.idleSubtitle.innerText = "Klicke als Admin in Streamlit auf 'Jetzt auslosen'.";
-            }
+            startDrawProcess();
             return;
         }
 
