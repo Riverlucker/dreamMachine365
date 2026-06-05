@@ -70,17 +70,21 @@ async function init() {
         if (scheduleDateEl) scheduleDateEl.innerText = `(am ${dateString} um ${timeString} Uhr)`;
 
         const autoplay = urlParams.get('autoplay') === 'true' || window.autoplay === true;
+        const now = new Date();
+        const scheduled = new Date(config.scheduled_time);
+        const diffMinutes = (now - scheduled) / 1000 / 60;
 
+        // Ensure we have a sequence to play or show (either saved or deterministically pre-generated)
         if (existingResults && existingResults.sequence) {
-            // Draw already happened
             drawSequence = existingResults.sequence;
-            
-            const now = new Date();
-            const scheduled = new Date(config.scheduled_time);
-            const diffMinutes = (now - scheduled) / 1000 / 60;
-            
-            if (autoplay || (diffMinutes >= 0 && diffMinutes < 5)) {
-                // Reset UI and start replay directly
+        } else if (window.preGeneratedSequence && window.preGeneratedSequence.length > 0) {
+            drawSequence = window.preGeneratedSequence;
+        }
+
+        // Determine UI state strictly based on time, independent of admin actions
+        if (diffMinutes >= 5) {
+            // More than 5 minutes late: Give them the choice (unless forced)
+            if (autoplay) {
                 currentStep = 0;
                 renderPots();
                 renderTeams();
@@ -88,9 +92,15 @@ async function init() {
             } else {
                 showReplayPrompt();
             }
+        } else if (diffMinutes >= 0 && diffMinutes < 5) {
+            // Within 5 minutes: Autoplay automatically
+            currentStep = 0;
+            renderPots();
+            renderTeams();
+            startDrawProcess(true);
         } else {
-            // Need to generate
-            startTimer(new Date(config.scheduled_time));
+            // Future event: Start the countdown timer
+            startTimer(scheduled);
         }
 
         elements.btnForceStart.addEventListener('click', () => {
