@@ -1,0 +1,583 @@
+{
+  "tournament_name": "Ryder Cup 2026",
+  "is_ryder_cup": true,
+  "admin_password": "admin",
+  "score_password": "golf",
+  "teams": [
+    {
+      "id": "team_eu",
+      "name": "Team Europe",
+      "color": "#003399"
+    },
+    {
+      "id": "team_us",
+      "name": "Team USA",
+      "color": "#B31942"
+    }
+  ],
+  "rounds": [
+    {
+      "id": "r1",
+      "name": "Tag 1 - Vormittag (T-Club Palma)",
+      "course_id": "tclub_palma",
+      "format": "matchplay",
+      "sequence": 1
+    },
+    {
+      "id": "r2",
+      "name": "Tag 1 - Nachmittag (T-Club Palma)",
+      "course_id": "tclub_palma",
+      "format": "matchplay",
+      "sequence": 2
+    },
+    {
+      "id": "r3",
+      "name": "Tag 2 - Vormittag (Son Gual)",
+      "course_id": "son_gual",
+      "format": "matchplay",
+      "sequence": 3
+    },
+    {
+      "id": "r4",
+      "name": "Tag 2 - Nachmittag (Son Gual)",
+      "course_id": "son_gual",
+      "format": "matchplay",
+      "sequence": 4
+    },
+    {
+      "id": "r5",
+      "name": "Tag 3 - Einzel (T-Club Calvia)",
+      "course_id": "tclub_calvia",
+      "format": "matchplay",
+      "sequence": 5
+    }
+  ],
+  "players": [
+    {
+      "id": "eu_r1_0",
+      "name": "Müller/Meier",
+      "team_id": "team_eu",
+      "handicap": 0.0
+    },
+    {
+      "id": "us_r1_0",
+      "name": "Schmidt/Tönnes",
+      "team_id": "team_us",
+      "handicap": 0.0
+    },
+    {
+      "id": "eu_r1_1",
+      "name": "EU Paar 2",
+      "team_id": "team_eu",
+      "handicap": 0.0
+    },
+    {
+      "id": "us_r1_1",
+      "name": "US Paar 2",
+      "team_id": "team_us",
+      "handicap": 0.0
+    },
+    {
+      "id": "eu_r1_2",
+      "name": "EU Paar 3",
+      "team_id": "team_eu",
+      "handicap": 0.0
+    },
+    {
+      "id": "us_r1_2",
+      "name": "US Paar 3",
+      "team_id": "team_us",
+      "handicap": 0.0
+    },
+    {
+      "id": "eu_r2_0",
+      "name": "EU Paar 1",
+      "team_id": "team_eu",
+      "handicap": 0.0
+    },
+    {
+      "id": "us_r2_0",
+      "name": "US Paar 1",
+      "team_id": "team_us",
+      "handicap": 0.0
+    },
+    {
+      "id": "eu_r2_1",
+      "name": "EU Paar 2",
+      "team_id": "team_eu",
+      "handicap": 0.0
+    },
+    {
+      "id": "us_r2_1",
+      "name": "US Paar 2",
+      "team_id": "team_us",
+      "handicap": 0.0
+    },
+    {
+      "id": "eu_r2_2",
+      "name": "EU Paar 3",
+      "team_id": "team_eu",
+      "handicap": 0.0
+    },
+    {
+      "id": "us_r2_2",
+      "name": "US Paar 3",
+      "team_id": "team_us",
+      "handicap": 0.0
+    },
+    {
+      "id": "eu_r3_0",
+      "name": "EU Paar 1",
+      "team_id": "team_eu",
+      "handicap": 0.0
+    },
+    {
+      "id": "us_r3_0",
+      "name": "US Paar 1",
+      "team_id": "team_us",
+      "handicap": 0.0
+    },
+    {
+      "id": "eu_r3_1",
+      "name": "EU Paar 2",
+      "team_id": "team_eu",
+      "handicap": 0.0
+    },
+    {
+      "id": "us_r3_1",
+      "name": "US Paar 2",
+      "team_id": "team_us",
+      "handicap": 0.0
+    },
+    {
+      "id": "eu_r3_2",
+      "name": "EU Paar 3",
+      "team_id": "team_eu",
+      "handicap": 0.0
+    },
+    {
+      "id": "us_r3_2",
+      "name": "US Paar 3",
+      "team_id": "team_us",
+      "handicap": 0.0
+    },
+    {
+      "id": "eu_r4_0",
+      "name": "EU Paar 1",
+      "team_id": "team_eu",
+      "handicap": 0.0
+    },
+    {
+      "id": "us_r4_0",
+      "name": "US Paar 1",
+      "team_id": "team_us",
+      "handicap": 0.0
+    },
+    {
+      "id": "eu_r4_1",
+      "name": "EU Paar 2",
+      "team_id": "team_eu",
+      "handicap": 0.0
+    },
+    {
+      "id": "us_r4_1",
+      "name": "US Paar 2",
+      "team_id": "team_us",
+      "handicap": 0.0
+    },
+    {
+      "id": "eu_r4_2",
+      "name": "EU Paar 3",
+      "team_id": "team_eu",
+      "handicap": 0.0
+    },
+    {
+      "id": "us_r4_2",
+      "name": "US Paar 3",
+      "team_id": "team_us",
+      "handicap": 0.0
+    },
+    {
+      "id": "eu_r5_0",
+      "name": "EU Spieler 1",
+      "team_id": "team_eu",
+      "handicap": 0.0
+    },
+    {
+      "id": "us_r5_0",
+      "name": "US Spieler 1",
+      "team_id": "team_us",
+      "handicap": 0.0
+    },
+    {
+      "id": "eu_r5_1",
+      "name": "EU Spieler 2",
+      "team_id": "team_eu",
+      "handicap": 0.0
+    },
+    {
+      "id": "us_r5_1",
+      "name": "US Spieler 2",
+      "team_id": "team_us",
+      "handicap": 0.0
+    },
+    {
+      "id": "eu_r5_2",
+      "name": "EU Spieler 3",
+      "team_id": "team_eu",
+      "handicap": 0.0
+    },
+    {
+      "id": "us_r5_2",
+      "name": "US Spieler 3",
+      "team_id": "team_us",
+      "handicap": 0.0
+    },
+    {
+      "id": "eu_r5_3",
+      "name": "EU Spieler 4",
+      "team_id": "team_eu",
+      "handicap": 0.0
+    },
+    {
+      "id": "us_r5_3",
+      "name": "US Spieler 4",
+      "team_id": "team_us",
+      "handicap": 0.0
+    },
+    {
+      "id": "eu_r5_4",
+      "name": "EU Spieler 5",
+      "team_id": "team_eu",
+      "handicap": 0.0
+    },
+    {
+      "id": "us_r5_4",
+      "name": "US Spieler 5",
+      "team_id": "team_us",
+      "handicap": 0.0
+    },
+    {
+      "id": "eu_r5_5",
+      "name": "EU Spieler 6",
+      "team_id": "team_eu",
+      "handicap": 0.0
+    },
+    {
+      "id": "us_r5_5",
+      "name": "US Spieler 6",
+      "team_id": "team_us",
+      "handicap": 0.0
+    }
+  ],
+  "playing_handicaps": {
+    "eu_r1_0": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "us_r1_0": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "eu_r1_1": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "us_r1_1": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "eu_r1_2": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "us_r1_2": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "eu_r2_0": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "us_r2_0": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "eu_r2_1": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "us_r2_1": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "eu_r2_2": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "us_r2_2": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "eu_r3_0": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "us_r3_0": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "eu_r3_1": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "us_r3_1": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "eu_r3_2": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "us_r3_2": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "eu_r4_0": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "us_r4_0": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "eu_r4_1": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "us_r4_1": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "eu_r4_2": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "us_r4_2": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "eu_r5_0": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "us_r5_0": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "eu_r5_1": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "us_r5_1": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "eu_r5_2": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "us_r5_2": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "eu_r5_3": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "us_r5_3": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "eu_r5_4": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "us_r5_4": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "eu_r5_5": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    },
+    "us_r5_5": {
+      "tclub_palma": 0,
+      "son_gual": 0,
+      "tclub_calvia": 0
+    }
+  },
+  "matchups": [
+    {
+      "id": "m1",
+      "round_id": "r1",
+      "player_a_id": "eu_r1_0",
+      "player_b_id": "us_r1_0",
+      "name": "Müller/Meier vs Schmidt/Tönnes"
+    },
+    {
+      "id": "m2",
+      "round_id": "r1",
+      "player_a_id": "eu_r1_1",
+      "player_b_id": "us_r1_1",
+      "name": "EU Paar 2 vs US Paar 2"
+    },
+    {
+      "id": "m3",
+      "round_id": "r1",
+      "player_a_id": "eu_r1_2",
+      "player_b_id": "us_r1_2",
+      "name": "EU Paar 3 vs US Paar 3"
+    },
+    {
+      "id": "m4",
+      "round_id": "r2",
+      "player_a_id": "eu_r2_0",
+      "player_b_id": "us_r2_0",
+      "name": "EU Paar 1 vs US Paar 1"
+    },
+    {
+      "id": "m5",
+      "round_id": "r2",
+      "player_a_id": "eu_r2_1",
+      "player_b_id": "us_r2_1",
+      "name": "EU Paar 2 vs US Paar 2"
+    },
+    {
+      "id": "m6",
+      "round_id": "r2",
+      "player_a_id": "eu_r2_2",
+      "player_b_id": "us_r2_2",
+      "name": "EU Paar 3 vs US Paar 3"
+    },
+    {
+      "id": "m7",
+      "round_id": "r3",
+      "player_a_id": "eu_r3_0",
+      "player_b_id": "us_r3_0",
+      "name": "EU Paar 1 vs US Paar 1"
+    },
+    {
+      "id": "m8",
+      "round_id": "r3",
+      "player_a_id": "eu_r3_1",
+      "player_b_id": "us_r3_1",
+      "name": "EU Paar 2 vs US Paar 2"
+    },
+    {
+      "id": "m9",
+      "round_id": "r3",
+      "player_a_id": "eu_r3_2",
+      "player_b_id": "us_r3_2",
+      "name": "EU Paar 3 vs US Paar 3"
+    },
+    {
+      "id": "m10",
+      "round_id": "r4",
+      "player_a_id": "eu_r4_0",
+      "player_b_id": "us_r4_0",
+      "name": "EU Paar 1 vs US Paar 1"
+    },
+    {
+      "id": "m11",
+      "round_id": "r4",
+      "player_a_id": "eu_r4_1",
+      "player_b_id": "us_r4_1",
+      "name": "EU Paar 2 vs US Paar 2"
+    },
+    {
+      "id": "m12",
+      "round_id": "r4",
+      "player_a_id": "eu_r4_2",
+      "player_b_id": "us_r4_2",
+      "name": "EU Paar 3 vs US Paar 3"
+    },
+    {
+      "id": "m13",
+      "round_id": "r5",
+      "player_a_id": "eu_r5_0",
+      "player_b_id": "us_r5_0",
+      "name": "EU Spieler 1 vs US Spieler 1"
+    },
+    {
+      "id": "m14",
+      "round_id": "r5",
+      "player_a_id": "eu_r5_1",
+      "player_b_id": "us_r5_1",
+      "name": "EU Spieler 2 vs US Spieler 2"
+    },
+    {
+      "id": "m15",
+      "round_id": "r5",
+      "player_a_id": "eu_r5_2",
+      "player_b_id": "us_r5_2",
+      "name": "EU Spieler 3 vs US Spieler 3"
+    },
+    {
+      "id": "m16",
+      "round_id": "r5",
+      "player_a_id": "eu_r5_3",
+      "player_b_id": "us_r5_3",
+      "name": "EU Spieler 4 vs US Spieler 4"
+    },
+    {
+      "id": "m17",
+      "round_id": "r5",
+      "player_a_id": "eu_r5_4",
+      "player_b_id": "us_r5_4",
+      "name": "EU Spieler 5 vs US Spieler 5"
+    },
+    {
+      "id": "m18",
+      "round_id": "r5",
+      "player_a_id": "eu_r5_5",
+      "player_b_id": "us_r5_5",
+      "name": "EU Spieler 6 vs US Spieler 6"
+    }
+  ]
+}

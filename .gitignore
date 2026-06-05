@@ -1,0 +1,20 @@
+# Zuerst alles ignorieren
+*
+
+# Aber diese spezifischen Ordner und ihre Inhalte erlauben:
+!Auslosung/
+!Auslosung/**
+
+!dreammachine/
+!dreammachine/**
+
+!golf_scoring/
+!golf_scoring/**
+
+!requirements.txt
+!.gitignore
+
+# Innerhalb dieser Ordner virtuelle Umgebungen oder Pycache ignorieren
+**/__pycache__/
+**/.venv*/
+**/.streamlit/

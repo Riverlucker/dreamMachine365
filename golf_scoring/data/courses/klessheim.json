@@ -1,0 +1,17 @@
+{
+  "id": "klessheim",
+  "name": "Klessheim (9 Loch)",
+  "cr": 35.0,
+  "slope": 113,
+  "holes": [
+    {"hole": 1, "par": 4, "index": 5},
+    {"hole": 2, "par": 3, "index": 9},
+    {"hole": 3, "par": 4, "index": 1},
+    {"hole": 4, "par": 5, "index": 7},
+    {"hole": 5, "par": 4, "index": 3},
+    {"hole": 6, "par": 3, "index": 8},
+    {"hole": 7, "par": 4, "index": 4},
+    {"hole": 8, "par": 5, "index": 2},
+    {"hole": 9, "par": 4, "index": 6}
+  ]
+}

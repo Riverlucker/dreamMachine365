@@ -1,0 +1,234 @@
+{
+  "drawId": "45_Loch_Challenge",
+  "sequence": [
+    {
+      "pot": {
+        "id": "pot_1",
+        "name": "Lostopf 1"
+      },
+      "player": {
+        "id": "p12",
+        "name": "Christoph Strehl",
+        "handicap": 5.5
+      },
+      "team": {
+        "id": "team_white",
+        "name": "Team White",
+        "color": "#e0e0e0",
+        "textColor": "#000000"
+      },
+      "isLastInPot": false,
+      "potDrawIndex": 1
+    },
+    {
+      "pot": {
+        "id": "pot_1",
+        "name": "Lostopf 1"
+      },
+      "player": {
+        "id": "p9",
+        "name": "Patrick Schreiber",
+        "handicap": 0.9
+      },
+      "team": {
+        "id": "team_blue",
+        "name": "Team Blue",
+        "color": "#1565c0",
+        "textColor": "#ffffff"
+      },
+      "isLastInPot": false,
+      "potDrawIndex": 1
+    },
+    {
+      "pot": {
+        "id": "pot_1",
+        "name": "Lostopf 1"
+      },
+      "player": {
+        "id": "p2",
+        "name": "Martin Baumgartner",
+        "handicap": 5.6
+      },
+      "team": {
+        "id": "team_black",
+        "name": "Team Black",
+        "color": "#111111",
+        "textColor": "#ffffff"
+      },
+      "isLastInPot": true,
+      "potDrawIndex": 1
+    },
+    {
+      "pot": {
+        "id": "pot_2",
+        "name": "Lostopf 2"
+      },
+      "player": {
+        "id": "p6",
+        "name": "Johannes Pfeil",
+        "handicap": 11.2
+      },
+      "team": {
+        "id": "team_white",
+        "name": "Team White",
+        "color": "#e0e0e0",
+        "textColor": "#000000"
+      },
+      "isLastInPot": false,
+      "potDrawIndex": 2
+    },
+    {
+      "pot": {
+        "id": "pot_2",
+        "name": "Lostopf 2"
+      },
+      "player": {
+        "id": "p4",
+        "name": "Florian Haas",
+        "handicap": 10.3
+      },
+      "team": {
+        "id": "team_blue",
+        "name": "Team Blue",
+        "color": "#1565c0",
+        "textColor": "#ffffff"
+      },
+      "isLastInPot": false,
+      "potDrawIndex": 2
+    },
+    {
+      "pot": {
+        "id": "pot_2",
+        "name": "Lostopf 2"
+      },
+      "player": {
+        "id": "p5",
+        "name": "Gustavo Salzar",
+        "handicap": 9.6
+      },
+      "team": {
+        "id": "team_black",
+        "name": "Team Black",
+        "color": "#111111",
+        "textColor": "#ffffff"
+      },
+      "isLastInPot": true,
+      "potDrawIndex": 2
+    },
+    {
+      "pot": {
+        "id": "pot_3",
+        "name": "Lostopf 3"
+      },
+      "player": {
+        "id": "p3",
+        "name": "David Baumgartner",
+        "handicap": 13.4
+      },
+      "team": {
+        "id": "team_white",
+        "name": "Team White",
+        "color": "#e0e0e0",
+        "textColor": "#000000"
+      },
+      "isLastInPot": false,
+      "potDrawIndex": 3
+    },
+    {
+      "pot": {
+        "id": "pot_3",
+        "name": "Lostopf 3"
+      },
+      "player": {
+        "id": "p1",
+        "name": "Alexander Kloiber",
+        "handicap": 12.7
+      },
+      "team": {
+        "id": "team_blue",
+        "name": "Team Blue",
+        "color": "#1565c0",
+        "textColor": "#ffffff"
+      },
+      "isLastInPot": false,
+      "potDrawIndex": 3
+    },
+    {
+      "pot": {
+        "id": "pot_3",
+        "name": "Lostopf 3"
+      },
+      "player": {
+        "id": "p11",
+        "name": "Vincenzo Königsdorfer",
+        "handicap": 13.8
+      },
+      "team": {
+        "id": "team_black",
+        "name": "Team Black",
+        "color": "#111111",
+        "textColor": "#ffffff"
+      },
+      "isLastInPot": true,
+      "potDrawIndex": 3
+    },
+    {
+      "pot": {
+        "id": "pot_4",
+        "name": "Lostopf 4"
+      },
+      "player": {
+        "id": "p8",
+        "name": "Norbert Hofmann",
+        "handicap": 14.3
+      },
+      "team": {
+        "id": "team_white",
+        "name": "Team White",
+        "color": "#e0e0e0",
+        "textColor": "#000000"
+      },
+      "isLastInPot": false,
+      "potDrawIndex": 4
+    },
+    {
+      "pot": {
+        "id": "pot_4",
+        "name": "Lostopf 4"
+      },
+      "player": {
+        "id": "p7",
+        "name": "Markus Möllinger",
+        "handicap": 18.5
+      },
+      "team": {
+        "id": "team_blue",
+        "name": "Team Blue",
+        "color": "#1565c0",
+        "textColor": "#ffffff"
+      },
+      "isLastInPot": false,
+      "potDrawIndex": 4
+    },
+    {
+      "pot": {
+        "id": "pot_4",
+        "name": "Lostopf 4"
+      },
+      "player": {
+        "id": "p10",
+        "name": "Thomas Canek",
+        "handicap": 26
+      },
+      "team": {
+        "id": "team_black",
+        "name": "Team Black",
+        "color": "#111111",
+        "textColor": "#ffffff"
+      },
+      "isLastInPot": true,
+      "potDrawIndex": 4
+    }
+  ],
+  "generated_at": "2026-06-05T07:33:23.887Z"
+}

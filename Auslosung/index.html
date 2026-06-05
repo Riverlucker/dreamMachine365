@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auslosung - 45-Loch Challenge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <div id="app" class="container">
+        <header class="glass-panel main-header">
+            <div class="header-content">
+                <h1>45-Loch Challenge <span class="highlight">Auslosung</span></h1>
+                <div id="timer-container" class="timer-box">
+                    <span class="timer-label">Startet in:</span>
+                    <span id="countdown" class="timer-value">--:--:--</span>
+                    <span id="schedule-date" class="timer-label"></span>
+                    <button id="btn-force-start" class="btn primary-btn">Jetzt losen</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="layout-grid">
+            <aside class="sidebar pots-sidebar">
+                <div class="glass-panel">
+                    <h2>Lostöpfe</h2>
+                    <div id="pots-container" class="pots-list">
+                        <!-- Pots will be injected here -->
+                    </div>
+                </div>
+            </aside>
+
+            <section class="main-content draw-section">
+                <div id="draw-stage" class="glass-panel stage-panel">
+                    <div id="stage-idle" class="stage-content">
+                        <h3 id="idle-title">Warten auf Start...</h3>
+                        <p id="idle-subtitle" class="subtitle">Die Auslosung beginnt automatisch zur terminierten Zeit.</p>
+                        <div id="replay-actions" class="hidden" style="margin-top: 20px; display: flex; gap: 10px; justify-content: center;">
+                            <button id="btn-replay" class="btn primary-btn">Visualisierung ansehen</button>
+                            <button id="btn-show-results" class="btn secondary-btn">Ergebnis sofort anzeigen</button>
+                        </div>
+                    </div>
+
+                    <div id="stage-active" class="stage-content hidden">
+                        <h3 id="current-pot-label">Zieht aus Lostopf 1...</h3>
+                        
+                        <div class="card-reveal-container">
+                            <div id="draw-card" class="draw-card">
+                                <div class="card-inner">
+                                    <div class="card-front">
+                                        <div class="spinner"></div>
+                                        <span>Ziehung läuft</span>
+                                    </div>
+                                    <div class="card-back" id="drawn-card-back">
+                                        <h4 id="drawn-player-name">Max Mustermann</h4>
+                                        <div class="handicap-badge">HCPI <span id="drawn-player-hc">10.0</span></div>
+                                        <div id="drawn-team-label" class="team-label">Team Weiß</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <div id="stage-finished" class="stage-content hidden">
+                        <h3>Auslosung beendet!</h3>
+                        <p class="subtitle">Alle Spieler wurden erfolgreich zugewiesen.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="teams-section full-width">
+                <div class="glass-panel">
+                    <h2>Teams</h2>
+                    <div id="teams-container" class="teams-grid">
+                        <!-- Teams will be injected here -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals or Overlays can go here -->
+
+    <script src="app.js"></script>
+</body>
+</html>
