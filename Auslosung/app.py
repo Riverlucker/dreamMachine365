@@ -12,12 +12,20 @@ st.set_page_config(
     layout="wide"
 )
 
-st.markdown("<h1 style='text-align: center; color: #f1cf6d;'>🎲 Auslosung der Teams</h1>", unsafe_allow_html=True)
+import re
+
+# Get and sanitize draw ID from query parameters
+draw_id = st.query_params.get("draw", "45_Loch_Challenge")
+draw_id = re.sub(r'[^a-zA-Z0-9_-]', '', draw_id)
+if not draw_id:
+    draw_id = "45_Loch_Challenge"
+
+st.markdown(f"<h1 style='text-align: center; color: #f1cf6d;'>🎲 Auslosung: {draw_id.replace('_', ' ')}</h1>", unsafe_allow_html=True)
 
 # Paths
 current_dir = os.path.dirname(os.path.abspath(__file__))
-config_file = os.path.join(current_dir, "45_Loch_Challenge.json")
-results_file = os.path.join(current_dir, "results_45_Loch_Challenge.json")
+config_file = os.path.join(current_dir, f"{draw_id}.json")
+results_file = os.path.join(current_dir, f"results_{draw_id}.json")
 index_file = os.path.join(current_dir, "index.html")
 css_file = os.path.join(current_dir, "style.css")
 js_file = os.path.join(current_dir, "app.js")
@@ -81,7 +89,7 @@ else:
             
             # Save results
             results_data = {
-                "drawId": "45_Loch_Challenge",
+                "drawId": draw_id,
                 "sequence": draw_sequence,
                 "generated_at": datetime.now().isoformat()
             }
@@ -91,7 +99,8 @@ else:
                 
             # Apply results to golf_scoring tournament configuration if it is in the parent workspace
             parent_dir = os.path.dirname(current_dir)
-            scoring_tournament_file = os.path.join(parent_dir, "golf_scoring", "data", "45_loch_challenge_tournament.json")
+            scoring_filename = f"{draw_id.lower()}_tournament.json"
+            scoring_tournament_file = os.path.join(parent_dir, "golf_scoring", "data", scoring_filename)
             if os.path.exists(scoring_tournament_file):
                 try:
                     with open(scoring_tournament_file, "r", encoding="utf-8") as sf:
