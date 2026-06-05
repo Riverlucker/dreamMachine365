@@ -46,7 +46,10 @@ else:
             st.error(f"Fehler beim Laden der Ergebnisse: {e}")
 
     # Draw triggering logic
-    autoplay = False
+    autoplay = st.session_state.get('trigger_autoplay', False)
+    if autoplay:
+        st.session_state['trigger_autoplay'] = False
+        
     if not existing_results:
         scheduled_time = datetime.fromisoformat(draw_config["scheduled_time"])
         now = datetime.now()
@@ -73,7 +76,7 @@ else:
             elif pwd:
                 st.error("Falsches Passwort!")
 
-        if force_draw or now >= scheduled_time:
+        if force_draw or (now >= scheduled_time and not st.session_state.get('results_deleted', False)):
             pots = copy.deepcopy(draw_config.get("pots", []))
             teams = draw_config.get("teams", [])
             draw_sequence = []
@@ -123,7 +126,7 @@ else:
                     st.warning(f"Konnte Teams nicht automatisch ins Scoring übertragen: {e}")
             
             existing_results = results_data
-            autoplay = True
+            st.session_state['trigger_autoplay'] = True
             st.success("Auslosung erfolgreich generiert!")
             st.rerun()
     else:
@@ -145,6 +148,7 @@ else:
                 if st.button("Auslosungsergebnis löschen ⚠️", type="secondary"):
                     try:
                         os.remove(results_file)
+                        st.session_state['results_deleted'] = True
                         st.success("Ergebnis erfolgreich gelöscht! Du kannst nun neu auslosen.")
                         st.rerun()
                     except Exception as e:
