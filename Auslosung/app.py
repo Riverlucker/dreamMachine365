@@ -54,27 +54,9 @@ else:
         scheduled_time = datetime.fromisoformat(draw_config["scheduled_time"])
         now = datetime.now()
         
-        st.markdown(
-            f"""
-            <div style="background-color: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px; text-align: center;">
-                <h3 style="margin-top: 0; color: #fff;">Warten auf den offiziellen Start</h3>
-                <p style="color: #ccc; font-size: 1.1rem; margin-bottom: 0;">
-                    📅 <strong>Startzeitpunkt:</strong> {scheduled_time.strftime('%d.%m.%Y um %H:%M Uhr')}
-                </p>
-            </div>
-            """, 
-            unsafe_allow_html=True
-        )
-        
-        # Show admin options to hide the manual draw trigger button
-        show_admin = st.checkbox("Admin-Optionen anzeigen")
-        force_draw = False
-        if show_admin:
-            pwd = st.text_input("Admin-Passwort:", type="password")
-            if pwd == "admin":
-                force_draw = st.button("Jetzt auslosen 🎲", type="primary", use_container_width=True)
-            elif pwd:
-                st.error("Falsches Passwort!")
+        force_draw = st.session_state.get('force_draw_trigger', False)
+        if force_draw:
+            st.session_state['force_draw_trigger'] = False
 
         if force_draw or (now >= scheduled_time and not st.session_state.get('results_deleted', False)):
             pots = copy.deepcopy(draw_config.get("pots", []))
@@ -130,31 +112,8 @@ else:
             st.success("Auslosung erfolgreich generiert!")
             st.rerun()
     else:
-        # Results exist - Admin tools to reset
-        st.markdown(
-            """
-            <div style="background-color: rgba(46, 204, 113, 0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(46, 204, 113, 0.2); margin-bottom: 20px; text-align: center;">
-                <span style="color: #2ecc71; font-weight: bold; font-size: 1.1rem;">🎉 Die Auslosung wurde erfolgreich durchgeführt!</span>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        
-        # Checkbox for Admin access
-        show_admin = st.checkbox("Admin-Optionen anzeigen")
-        if show_admin:
-            pwd = st.text_input("Admin-Passwort:", type="password")
-            if pwd == "admin":
-                if st.button("Auslosungsergebnis löschen ⚠️", type="secondary"):
-                    try:
-                        os.remove(results_file)
-                        st.session_state['results_deleted'] = True
-                        st.success("Ergebnis erfolgreich gelöscht! Du kannst nun neu auslosen.")
-                        st.rerun()
-                    except Exception as e:
-                        st.error(f"Fehler beim Löschen: {e}")
-            elif pwd:
-                st.error("Falsches Passwort!")
+        # No extra block here; we will put the Admin options at the bottom for both cases
+        pass
 
     # Build and render the HTML page inside iframe
     if os.path.exists(index_file) and os.path.exists(css_file) and os.path.exists(js_file):
@@ -188,5 +147,23 @@ else:
 
         # Render the custom iframe
         st.components.v1.html(html_content, height=1200, scrolling=True)
-    else:
-        st.error("HTML/CSS/JS Dateien der Visualisierung wurden nicht gefunden.")
+
+    # Move Admin Options to the very bottom
+    st.markdown("---")
+    show_admin = st.checkbox("Admin-Optionen anzeigen")
+    if show_admin:
+        pwd = st.text_input("Admin-Passwort:", type="password")
+        if pwd == "admin":
+            col1, col2 = st.columns(2)
+            with col1:
+                def trigger_draw():
+                    st.session_state['force_draw_trigger'] = True
+                st.button("Jetzt auslosen 🎲", type="primary", use_container_width=True, on_click=trigger_draw, disabled=bool(existing_results))
+            with col2:
+                def delete_results():
+                    if os.path.exists(results_file):
+                        os.remove(results_file)
+                    st.session_state['results_deleted'] = True
+                st.button("Auslosungsergebnis löschen ⚠️", type="secondary", use_container_width=True, on_click=delete_results, disabled=not bool(existing_results))
+        elif pwd:
+            st.error("Falsches Passwort!")

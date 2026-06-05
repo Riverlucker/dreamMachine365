@@ -73,7 +73,12 @@ async function init() {
         if (existingResults && existingResults.sequence) {
             // Draw already happened
             drawSequence = existingResults.sequence;
-            if (autoplay) {
+            
+            const now = new Date();
+            const scheduled = new Date(config.scheduled_time);
+            const diffMinutes = (now - scheduled) / 1000 / 60;
+            
+            if (autoplay || (diffMinutes >= 0 && diffMinutes < 5)) {
                 // Reset UI and start replay directly
                 currentStep = 0;
                 renderPots();
