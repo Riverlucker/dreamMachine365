@@ -194,7 +194,11 @@ async function startDrawProcess(isReplay = false) {
     elements.stageActive.classList.remove('hidden');
     
     if (!isReplay && drawSequence.length === 0) {
-        generateDrawSequence();
+        if (window.preGeneratedSequence && window.preGeneratedSequence.length > 0) {
+            drawSequence = window.preGeneratedSequence;
+        } else {
+            generateDrawSequence();
+        }
         await saveResults();
     }
     

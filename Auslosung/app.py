@@ -58,24 +58,31 @@ else:
         if force_draw:
             st.session_state['force_draw_trigger'] = False
 
+        # Generate deterministic sequence based on event scheduled time
+        import hashlib
+        seed_string = f"{draw_id}_{draw_config.get('scheduled_time', '')}"
+        seed_val = int(hashlib.md5(seed_string.encode()).hexdigest(), 16)
+        
+        random.seed(seed_val)
+        pots_temp = copy.deepcopy(draw_config.get("pots", []))
+        teams_temp = draw_config.get("teams", [])
+        pre_sequence = []
+        for pot_idx, pot in enumerate(pots_temp):
+            players = pot.get("players", [])
+            random.shuffle(players)
+            ordered_teams = list(teams_temp)
+            for i, player in enumerate(players):
+                pre_sequence.append({
+                    "pot": { "id": pot["id"], "name": pot["name"] },
+                    "player": player,
+                    "team": ordered_teams[i],
+                    "isLastInPot": (i == len(players) - 1),
+                    "potDrawIndex": pot_idx + 1
+                })
+        random.seed() # reset
+
         if force_draw or (now >= scheduled_time and not st.session_state.get('results_deleted', False)):
-            pots = copy.deepcopy(draw_config.get("pots", []))
-            teams = draw_config.get("teams", [])
-            draw_sequence = []
-            
-            for pot_idx, pot in enumerate(pots):
-                players = pot.get("players", [])
-                random.shuffle(players)
-                ordered_teams = list(teams)
-                
-                for i, player in enumerate(players):
-                    draw_sequence.append({
-                        "pot": { "id": pot["id"], "name": pot["name"] },
-                        "player": player,
-                        "team": ordered_teams[i],
-                        "isLastInPot": (i == len(players) - 1),
-                        "potDrawIndex": pot_idx + 1
-                    })
+            draw_sequence = pre_sequence
             
             # Save results
             results_data = {
@@ -135,6 +142,7 @@ else:
         <script>
             window.drawConfig = {json.dumps(draw_config, ensure_ascii=False)};
             window.existingResults = {json.dumps(existing_results, ensure_ascii=False) if existing_results else 'null'};
+            window.preGeneratedSequence = {json.dumps(pre_sequence if not existing_results else [], ensure_ascii=False)};
             window.autoplay = {'true' if autoplay else 'false'};
             window.isStreamlit = true;
             {js_content}
