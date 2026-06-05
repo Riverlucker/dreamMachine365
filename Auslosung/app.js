@@ -71,7 +71,6 @@ async function init() {
 
         const autoplay = urlParams.get('autoplay') === 'true' || window.autoplay === true;
         const now = new Date();
-        const scheduled = new Date(config.scheduled_time);
         const diffMinutes = (now - scheduled) / 1000 / 60;
 
         // Ensure we have a sequence to play or show (either saved or deterministically pre-generated)
