@@ -282,14 +282,14 @@ h2 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 150px;
+    min-height: 80px;
     text-align: center;
-    padding: 1rem;
+    padding: 0.5rem;
 }
 
 .stage-content h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
 }
 
 .subtitle {
@@ -301,8 +301,8 @@ h2 {
 /* Draw Card Animation */
 .card-reveal-container {
     perspective: 1000px;
-    width: 160px;
-    height: 180px;
+    width: 280px;
+    height: 75px;
     margin: 0 auto;
 }
 
@@ -349,6 +349,7 @@ h2 {
     justify-content: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border: 2px solid rgba(255,255,255,0.1);
+    padding: 0.5rem;
 }
 
 .card-front {
@@ -362,26 +363,34 @@ h2 {
     background: #fff;
     color: #111;
     transform: rotateY(180deg);
-    padding: 1.2rem;
+    padding: 0.5rem;
+}
+
+.player-info-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 4px;
 }
 
 .card-back h4 {
     font-size: 1.1rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
 }
 
 .handicap-badge {
     background: #f0f0f0;
-    padding: 0.2rem 0.6rem;
+    padding: 0.1rem 0.4rem;
     border-radius: 50px;
     font-weight: 800;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
     border: 1px solid #ccc;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
 }
 
 .team-label {
-    padding: 0.3rem 0.6rem;
+    padding: 0.2rem 0.4rem;
     border-radius: 8px;
     font-weight: 700;
     font-size: 0.85rem;
@@ -390,13 +399,13 @@ h2 {
 }
 
 .spinner {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     border: 3px solid rgba(255,255,255,0.1);
     border-top: 3px solid var(--accent-color);
     border-radius: 50%;
     animation: spin 1s linear infinite;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
 }
 
 @keyframes spin {
