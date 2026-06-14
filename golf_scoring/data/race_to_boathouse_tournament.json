@@ -1,0 +1,79 @@
+{
+  "tournament_name": "Race to Boathouse",
+  "admin_password": "admin",
+  "score_password": "golf",
+  "teams": [
+    {
+      "id": "team_1",
+      "name": "Team 1",
+      "color": "#e0e0e0"
+    }
+  ],
+  "players": [
+    {
+      "id": "p1",
+      "name": "Hans Peter Grabner",
+      "team_id": "team_1",
+      "handicap": 13.3
+    },
+    {
+      "id": "p2",
+      "name": "Christoph Strehl",
+      "team_id": "team_1",
+      "handicap": 5.5
+    }
+  ],
+  "rounds": [
+    {
+      "id": "round_1",
+      "name": "Runde 1 - Diamond",
+      "course_id": "diamond",
+      "format": "stableford",
+      "sequence": 1
+    },
+    {
+      "id": "round_2",
+      "name": "Runde 2 - Country Course",
+      "course_id": "country_course",
+      "format": "stableford",
+      "sequence": 2
+    },
+    {
+      "id": "round_3",
+      "name": "Runde 3 - Park Course (9L)",
+      "course_id": "park_course",
+      "format": "stableford",
+      "sequence": 3
+    }
+  ],
+  "playing_handicaps": {
+    "p1": {
+      "altentann": 14,
+      "country_course": 15,
+      "diamond": 14,
+      "eugendorf": 15,
+      "gc_blue": 13,
+      "gc_green": 13,
+      "gc_red": 13,
+      "klessheim": 16,
+      "park_course": 16,
+      "son_gual": 13,
+      "tclub_calvia": 13,
+      "tclub_palma": 13
+    },
+    "p2": {
+      "altentann": 5,
+      "country_course": 5,
+      "diamond": 5,
+      "eugendorf": 5,
+      "gc_blue": 6,
+      "gc_green": 6,
+      "gc_red": 6,
+      "klessheim": 7,
+      "park_course": 7,
+      "son_gual": 6,
+      "tclub_calvia": 6,
+      "tclub_palma": 6
+    }
+  }
+}
