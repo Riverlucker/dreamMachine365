@@ -528,7 +528,17 @@ if page == "🏆 Leaderboard":
                     
                     html += "<tr>"
                     html += f"<td><span class='rank-badge {rank_class}'>{rank_str}</span></td>"
-                    html += f"<td><strong>{p['name']}</strong></td>"
+                    p_active_r_id = rounds_list[-1]['id'] if rounds_list else ""
+                    for r in rounds_list:
+                        c_id = r.get("course_id")
+                        c_data = courses_cache.get(c_id, {})
+                        max_h = len(c_data.get("holes", []))
+                        r_stats = p["rounds"].get(r["id"], {})
+                        if r_stats.get("holes_played", 0) < max_h:
+                            p_active_r_id = r["id"]
+                            break
+                    name_link = f"?event={event_id}&v_player={p['id']}&v_round={p_active_r_id}&v_type=netto"
+                    html += f"<td><a href='{name_link}' target='_self' style='text-decoration:none; color:inherit;'><strong>{p['name']}</strong></a></td>"
                     if event_id != "race_to_boathouse":
                         html += f"<td>{team_tag}</td>"
                     html += f"<td>{p['handicap']}</td>"
@@ -615,7 +625,17 @@ if page == "🏆 Leaderboard":
                     
                     html += "<tr>"
                     html += f"<td><span class='rank-badge {rank_class}'>{rank_str}</span></td>"
-                    html += f"<td><strong>{p['name']}</strong></td>"
+                    p_active_r_id = rounds_list[-1]['id'] if rounds_list else ""
+                    for r in rounds_list:
+                        c_id = r.get("course_id")
+                        c_data = courses_cache.get(c_id, {})
+                        max_h = len(c_data.get("holes", []))
+                        r_stats = p["rounds"].get(r["id"], {})
+                        if r_stats.get("holes_played", 0) < max_h:
+                            p_active_r_id = r["id"]
+                            break
+                    name_link = f"?event={event_id}&v_player={p['id']}&v_round={p_active_r_id}&v_type=brutto"
+                    html += f"<td><a href='{name_link}' target='_self' style='text-decoration:none; color:inherit;'><strong>{p['name']}</strong></a></td>"
                     if event_id != "race_to_boathouse":
                         html += f"<td>{team_tag}</td>"
                     html += f"<td>{p['handicap']}</td>"
