@@ -747,13 +747,18 @@ elif page == "✍️ Scores eingeben":
             
                 if not is_ryder_cup:
                     player_names = [p["name"] for p in players]
-                    if "selected_players" not in st.session_state:
-                        st.session_state.selected_players = player_names
+                    if "persisted_selected_players" not in st.session_state:
+                        st.session_state.persisted_selected_players = player_names
+                    
+                    def update_selected_players():
+                        st.session_state.persisted_selected_players = st.session_state.selected_players_widget
                     
                     selected_player_names = st.multiselect(
                         "Welche Spieler möchtest du erfassen?", 
                         options=player_names, 
-                        key="selected_players"
+                        default=st.session_state.persisted_selected_players,
+                        key="selected_players_widget",
+                        on_change=update_selected_players
                     )
 
                     filtered_players = [p for p in players if p["name"] in selected_player_names]
