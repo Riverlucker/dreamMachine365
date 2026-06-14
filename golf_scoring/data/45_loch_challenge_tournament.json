@@ -123,7 +123,7 @@
       "gc_blue": 1,
       "gc_green": 1,
       "gc_red": 1,
-      "klessheim": 1,
+      "klessheim": 2,
       "son_gual": 1,
       "tclub_calvia": 1,
       "tclub_palma": 1
@@ -134,7 +134,7 @@
       "gc_blue": 10,
       "gc_green": 10,
       "gc_red": 10,
-      "klessheim": 6,
+      "klessheim": 12,
       "son_gual": 10,
       "tclub_calvia": 10,
       "tclub_palma": 10
@@ -145,7 +145,7 @@
       "gc_blue": 13,
       "gc_green": 13,
       "gc_red": 13,
-      "klessheim": 8,
+      "klessheim": 16,
       "son_gual": 13,
       "tclub_calvia": 13,
       "tclub_palma": 13
@@ -156,7 +156,7 @@
       "gc_blue": 18,
       "gc_green": 18,
       "gc_red": 18,
-      "klessheim": 11,
+      "klessheim": 22,
       "son_gual": 18,
       "tclub_calvia": 18,
       "tclub_palma": 18
@@ -167,7 +167,7 @@
       "gc_blue": 6,
       "gc_green": 6,
       "gc_red": 6,
-      "klessheim": 4,
+      "klessheim": 7,
       "son_gual": 6,
       "tclub_calvia": 6,
       "tclub_palma": 6
@@ -178,7 +178,7 @@
       "gc_blue": 10,
       "gc_green": 10,
       "gc_red": 10,
-      "klessheim": 6,
+      "klessheim": 13,
       "son_gual": 10,
       "tclub_calvia": 10,
       "tclub_palma": 10
@@ -189,7 +189,7 @@
       "gc_blue": 13,
       "gc_green": 13,
       "gc_red": 13,
-      "klessheim": 8,
+      "klessheim": 16,
       "son_gual": 13,
       "tclub_calvia": 13,
       "tclub_palma": 13
@@ -200,7 +200,7 @@
       "gc_blue": 26,
       "gc_green": 26,
       "gc_red": 26,
-      "klessheim": 15,
+      "klessheim": 31,
       "son_gual": 26,
       "tclub_calvia": 26,
       "tclub_palma": 26
@@ -211,7 +211,7 @@
       "gc_blue": 6,
       "gc_green": 6,
       "gc_red": 6,
-      "klessheim": 4,
+      "klessheim": 7,
       "son_gual": 6,
       "tclub_calvia": 6,
       "tclub_palma": 6
@@ -222,7 +222,7 @@
       "gc_blue": 11,
       "gc_green": 11,
       "gc_red": 11,
-      "klessheim": 7,
+      "klessheim": 14,
       "son_gual": 11,
       "tclub_calvia": 11,
       "tclub_palma": 11
@@ -233,7 +233,7 @@
       "gc_blue": 14,
       "gc_green": 14,
       "gc_red": 14,
-      "klessheim": 8,
+      "klessheim": 17,
       "son_gual": 14,
       "tclub_calvia": 14,
       "tclub_palma": 14
@@ -244,7 +244,7 @@
       "gc_blue": 14,
       "gc_green": 14,
       "gc_red": 14,
-      "klessheim": 9,
+      "klessheim": 17,
       "son_gual": 14,
       "tclub_calvia": 14,
       "tclub_palma": 14
