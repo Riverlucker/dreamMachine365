@@ -30,7 +30,7 @@
       "id": "p2",
       "name": "Gustavo Salzar",
       "team_id": "team_white",
-      "handicap": 9.6
+      "handicap": 9.4
     },
     {
       "id": "p3",
@@ -129,15 +129,15 @@
       "tclub_palma": 1
     },
     "p2": {
-      "altentann": 10,
+      "altentann": 9,
       "eugendorf": 10,
-      "gc_blue": 10,
-      "gc_green": 10,
-      "gc_red": 10,
+      "gc_blue": 9,
+      "gc_green": 9,
+      "gc_red": 9,
       "klessheim": 12,
-      "son_gual": 10,
-      "tclub_calvia": 10,
-      "tclub_palma": 10
+      "son_gual": 9,
+      "tclub_calvia": 9,
+      "tclub_palma": 9
     },
     "p3": {
       "altentann": 13,
