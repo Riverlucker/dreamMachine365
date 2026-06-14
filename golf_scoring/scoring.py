@@ -13,8 +13,7 @@ def calculate_playing_handicap(whi: float, cr: float = None, slope: int = None, 
         return round(whi) + extra_strokes
         
     if par is not None and par < 45 and cr is not None and cr > 45:
-        cr = cr / 2.0
-        whi = whi / 2.0
+        par = par * 2
     ch = whi * (slope / 113.0) + (cr - par)
     return round(ch) + extra_strokes
 
