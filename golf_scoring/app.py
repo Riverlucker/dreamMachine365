@@ -189,7 +189,7 @@ def show_scorecard_page(p_id, r_id, tournament_data, scores_data, courses_cache_
     # Construct transposed HTML table
     html = "<div class='leaderboard-container' style='margin-top: 15px; overflow-x: auto;'><table class='leaderboard-table' style='width: 100%; text-align: center; font-size: 0.9rem;'>"
     
-    rows = [holes_row, par_row, idx_row, vorgabe_row, gross_row, pts_row]
+    rows = [holes_row, par_row, idx_row, gross_row, pts_row] if str(v_type).lower() == "brutto" else [holes_row, par_row, idx_row, vorgabe_row, gross_row, pts_row]
     for r_idx, row in enumerate(rows):
         # Add slight background to total column and labels
         bg_color = "rgba(255,255,255,0.05)" if r_idx % 2 == 0 else "transparent"
@@ -495,7 +495,8 @@ if page == "🏆 Leaderboard":
                 
                 # Render Player Net Table
                 html = "<div class='leaderboard-container'><table class='leaderboard-table'>"
-                html += "<thead><tr><th>Rang</th><th>Spieler</th><th>Team</th><th>HCP</th>"
+                team_th = "" if event_id == "race_to_boathouse" else "<th>Team</th>"
+                html += f"<thead><tr><th>Rang</th><th>Spieler</th>{team_th}<th>HCP</th>"
                 if is_overall:
                     for r in rounds_list:
                         html_details_name = r['name'].replace("Runde ", "R").split(" - ")[0]
@@ -528,7 +529,8 @@ if page == "🏆 Leaderboard":
                     html += "<tr>"
                     html += f"<td><span class='rank-badge {rank_class}'>{rank_str}</span></td>"
                     html += f"<td><strong>{p['name']}</strong></td>"
-                    html += f"<td>{team_tag}</td>"
+                    if event_id != "race_to_boathouse":
+                        html += f"<td>{team_tag}</td>"
                     html += f"<td>{p['handicap']}</td>"
                 
                     if is_overall:
@@ -580,7 +582,8 @@ if page == "🏆 Leaderboard":
                 
                 # Render Player Gross Table
                 html = "<div class='leaderboard-container'><table class='leaderboard-table'>"
-                html += "<thead><tr><th>Rang</th><th>Spieler</th><th>Team</th><th>HCP</th>"
+                team_th = "" if event_id == "race_to_boathouse" else "<th>Team</th>"
+                html += f"<thead><tr><th>Rang</th><th>Spieler</th>{team_th}<th>HCP</th>"
                 if is_overall:
                     for r in rounds_list:
                         html_details_name = r['name'].replace("Runde ", "R").split(" - ")[0]
@@ -613,7 +616,8 @@ if page == "🏆 Leaderboard":
                     html += "<tr>"
                     html += f"<td><span class='rank-badge {rank_class}'>{rank_str}</span></td>"
                     html += f"<td><strong>{p['name']}</strong></td>"
-                    html += f"<td>{team_tag}</td>"
+                    if event_id != "race_to_boathouse":
+                        html += f"<td>{team_tag}</td>"
                     html += f"<td>{p['handicap']}</td>"
                 
                     if is_overall:
