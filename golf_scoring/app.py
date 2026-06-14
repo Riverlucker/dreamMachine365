@@ -203,7 +203,7 @@ def show_scorecard_page(p_id, r_id, tournament_data, scores_data, courses_cache_
     html += "</table></div>"
     st.markdown(html, unsafe_allow_html=True)
     
-    if st.button("Schließen", width='stretch'):
+    if st.button("Schließen", use_container_width=True):
         if 'v_player' in st.query_params: del st.query_params['v_player']
         if 'v_round' in st.query_params: del st.query_params['v_round']
         st.rerun()
@@ -719,11 +719,11 @@ if page == "🏆 Leaderboard":
                 with c1_img:
                     img_path_2025 = os.path.join(base_dir, "assets", "winners", "2025.png")
                     if os.path.exists(img_path_2025):
-                        st.image(img_path_2025, width='stretch')
+                        st.image(img_path_2025, use_container_width=True)
                 with c2_img:
                     img_path_2024 = os.path.join(base_dir, "assets", "winners", "2024.png")
                     if os.path.exists(img_path_2024):
-                        st.image(img_path_2024, width='stretch')
+                        st.image(img_path_2024, use_container_width=True)
                     
                 st.markdown("</div>", unsafe_allow_html=True)
 
@@ -785,7 +785,7 @@ elif page == "✍️ Scores eingeben":
                     st.markdown("<hr style='border-color: #f1cf6d; margin: 10px 0;'>", unsafe_allow_html=True)
                     col_prev, col_curr, col_next = st.columns([1, 2, 1])
                     with col_prev:
-                        if st.button("⬅️ Vorheriges", width='stretch'):
+                        if st.button("⬅️ Vorheriges", use_container_width=True):
                             curr_idx = hole_numbers.index(st.session_state.current_hole)
                             if curr_idx > 0:
                                 st.session_state.current_hole = hole_numbers[curr_idx - 1]
@@ -799,7 +799,7 @@ elif page == "✍️ Scores eingeben":
                         )
                         st.markdown(header_html, unsafe_allow_html=True)
                     with col_next:
-                        if st.button("Nächstes ➡️", width='stretch'):
+                        if st.button("Nächstes ➡️", use_container_width=True):
                             curr_idx = hole_numbers.index(st.session_state.current_hole)
                             if curr_idx < len(hole_numbers) - 1:
                                 st.session_state.current_hole = hole_numbers[curr_idx + 1]
@@ -833,19 +833,19 @@ elif page == "✍️ Scores eingeben":
                         
                             c1, c2, c3, c4 = st.columns(4)
                             with c1:
-                                if st.button(f"{name_a} gewinnt", key=f"win_a_{m_id}_{selected_hole}", width='stretch'):
+                                if st.button(f"{name_a} gewinnt", key=f"win_a_{m_id}_{selected_hole}", use_container_width=True):
                                     data_manager.update_scores_bulk(event_id, active_round["id"], selected_hole, {p_a_id: 1, p_b_id: 2}, username=st.session_state.get("scorer_name", "Admin"))
                                     st.rerun()
                             with c2:
-                                if st.button("Geteilt", key=f"tie_{m_id}_{selected_hole}", width='stretch'):
+                                if st.button("Geteilt", key=f"tie_{m_id}_{selected_hole}", use_container_width=True):
                                     data_manager.update_scores_bulk(event_id, active_round["id"], selected_hole, {p_a_id: 1, p_b_id: 1}, username=st.session_state.get("scorer_name", "Admin"))
                                     st.rerun()
                             with c3:
-                                if st.button(f"{name_b} gewinnt", key=f"win_b_{m_id}_{selected_hole}", width='stretch'):
+                                if st.button(f"{name_b} gewinnt", key=f"win_b_{m_id}_{selected_hole}", use_container_width=True):
                                     data_manager.update_scores_bulk(event_id, active_round["id"], selected_hole, {p_a_id: 2, p_b_id: 1}, username=st.session_state.get("scorer_name", "Admin"))
                                     st.rerun()
                             with c4:
-                                if st.button("Löschen", key=f"clear_{m_id}_{selected_hole}", width='stretch'):
+                                if st.button("Löschen", key=f"clear_{m_id}_{selected_hole}", use_container_width=True):
                                     data_manager.update_scores_bulk(event_id, active_round["id"], selected_hole, {p_a_id: 0, p_b_id: 0}, username=st.session_state.get("scorer_name", "Admin"))
                                     st.rerun()
                         st.markdown("</div>", unsafe_allow_html=True)
@@ -894,7 +894,7 @@ elif page == "✍️ Scores eingeben":
                                  
                                 par = hole_info['par']
                                 with c_minus:
-                                    if st.button("➖", key=f"minus_{p_id}_{selected_hole}", width='stretch'):
+                                    if st.button("➖", key=f"minus_{p_id}_{selected_hole}", use_container_width=True):
                                         new_val = par - 1 if existing_val == 0 else max(0, existing_val - 1)
                                         data_manager.update_scores_bulk(event_id, active_round["id"], selected_hole, {p_id: new_val}, username=st.session_state.get("scorer_name", "Admin"))
                                         st.rerun()
@@ -906,7 +906,7 @@ elif page == "✍️ Scores eingeben":
                                         display_val = "-"
                                     st.markdown(f"<div style='text-align:center; font-size:1.5rem; font-weight:bold; margin-top:5px;'>{display_val}</div>", unsafe_allow_html=True)
                                 with c_plus:
-                                    if st.button("➕", key=f"plus_{p_id}_{selected_hole}", width='stretch'):
+                                    if st.button("➕", key=f"plus_{p_id}_{selected_hole}", use_container_width=True):
                                         new_val = par if existing_val == 0 else existing_val + 1
                                         data_manager.update_scores_bulk(event_id, active_round["id"], selected_hole, {p_id: new_val}, username=st.session_state.get("scorer_name", "Admin"))
                                         st.rerun()
