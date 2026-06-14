@@ -3,7 +3,7 @@ Scoring calculations for the Golf Tournament Live Scoring App.
 Defines golf rules for Stableford and Matchplay.
 """
 
-def calculate_playing_handicap(whi: float, cr: float = None, slope: int = None, par: int = None, extra_strokes: int = 2) -> int:
+def calculate_playing_handicap(whi: float, cr: float = None, slope: int = None, par: int = None, extra_strokes: int = 0) -> int:
     """
     Calculates the Course Handicap dynamically based on WHI, CR, Slope, and Par.
     Formula: Playing Handicap = round(WHI * (Slope / 113) + (CR - Par)) + extra_strokes
@@ -12,6 +12,9 @@ def calculate_playing_handicap(whi: float, cr: float = None, slope: int = None, 
         # Fallback if course data is missing
         return round(whi) + extra_strokes
         
+    if par is not None and par < 45 and cr is not None and cr > 45:
+        cr = cr / 2.0
+        whi = whi / 2.0
     ch = whi * (slope / 113.0) + (cr - par)
     return round(ch) + extra_strokes
 
