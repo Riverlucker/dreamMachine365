@@ -259,25 +259,39 @@ if page == "🏆 Leaderboard":
         has_matchplay = len(tournament.get("matchups", [])) > 0
         is_ryder_cup = tournament.get("is_ryder_cup", False)
         
+        tab_options = []
         if is_ryder_cup:
             tab_options = ["🏆 Ryder Cup Scoreboard", "⚔️ Matchplay Duelle"]
-        elif has_matchplay:
-            tab_options = ["👥 Team Netto", "🏌️ Spieler Netto", "🏌️ Spieler Brutto", "⚔️ Matchplay Duelle", "🏆 Previous Winners"]
         else:
-            tab_options = ["👥 Team Netto", "🏌️ Spieler Netto", "🏌️ Spieler Brutto", "🏆 Previous Winners"]
+            if event_id != "race_to_boathouse":
+                tab_options.append("👥 Team Netto")
+                
+            tab_options.extend(["👤🏌️ Spieler Netto", "👤🏌️ Spieler Brutto"])
             
-        if is_ryder_cup:
+            if has_matchplay:
+                tab_options.append("⚔️ Matchplay Duelle")
+                
+            if event_id == "45_loch_challenge":
+                tab_options.append("🏆 Previous Winners")
+                
+        tab_team = tab_player_net = tab_player_gross = tab_matchplay = tab_winners = tab_ryder_cup = None
+        
+        if tab_options:
             tabs = st.tabs(tab_options)
-            tab_ryder_cup, tab_matchplay = tabs
-            tab_team = tab_player_net = tab_player_gross = tab_winners = None
-        elif has_matchplay:
-            tabs = st.tabs(tab_options)
-            tab_team, tab_player_net, tab_player_gross, tab_matchplay, tab_winners = tabs
-            tab_ryder_cup = None
-        else:
-            tabs = st.tabs(tab_options)
-            tab_team, tab_player_net, tab_player_gross, tab_winners = tabs
-            tab_ryder_cup = tab_matchplay = None
+            for name, tab in zip(tab_options, tabs):
+                if name == "🏆 Ryder Cup Scoreboard":
+                    tab_ryder_cup = tab
+                elif name == "👥 Team Netto":
+                    tab_team = tab
+                elif name == "👤🏌️ Spieler Netto":
+                    tab_player_net = tab
+                elif name == "👤🏌️ Spieler Brutto":
+                    tab_player_gross = tab
+                elif name == "⚔️ Matchplay Duelle":
+                    tab_matchplay = tab
+                elif name == "🏆 Previous Winners":
+                    tab_winners = tab
+
         # 🏆 Ryder Cup Scoreboard Tab
         if is_ryder_cup and tab_ryder_cup:
             with tab_ryder_cup:
