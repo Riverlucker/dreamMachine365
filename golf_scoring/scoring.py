@@ -97,8 +97,8 @@ def calculate_matchplay_status(
         si = hole["index"]
         par = hole["par"]
         
-        strokes_a = get_hole_handicap_strokes(player_a_hcp, si, total_holes)
-        strokes_b = get_hole_handicap_strokes(player_b_hcp, si, total_holes)
+        strokes_a = get_hole_handicap_strokes(player_a_hcp, si, 18)
+        strokes_b = get_hole_handicap_strokes(player_b_hcp, si, 18)
         
         score_a = player_a_scores.get(h_num)
         score_b = player_b_scores.get(h_num)
@@ -258,13 +258,18 @@ def compute_tournament_leaderboards(tournament: dict, scores: dict, courses_cach
                 
                 h_score = p_scores.get(str(h_num))
                 if h_score is not None and h_score > 0:
-                    h_hcp_strokes = get_hole_handicap_strokes(playing_hcp, si, total_holes)
+                    h_hcp_strokes = get_hole_handicap_strokes(playing_hcp, si, 18)
                     net_pts, gross_pts = calculate_stableford_points(h_score, par, h_hcp_strokes)
                     
                     r_net_points += net_pts
                     r_gross_points += gross_pts
-                    r_gross_strokes += h_score
-                    r_net_strokes += (h_score - h_hcp_strokes)
+                    
+                    # Cap scores at Double Bogey (+2) for stats based on Stableford rules
+                    gross_score_capped = min(h_score, par + 2)
+                    net_score_capped = min(h_score - h_hcp_strokes, par + 2)
+                    
+                    r_gross_strokes += gross_score_capped
+                    r_net_strokes += net_score_capped
                     r_holes_played += 1
                     r_par_played += par
                     

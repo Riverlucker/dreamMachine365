@@ -22,63 +22,63 @@
   "players": [
     {
       "id": "p1",
-      "name": "Alexander Kloiber",
-      "team_id": "team_blue",
-      "handicap": 12.7
-    },
-    {
-      "id": "p2",
-      "name": "Martin Baumgartner",
-      "team_id": "team_blue",
-      "handicap": 5.6
-    },
-    {
-      "id": "p3",
-      "name": "David Baumgartner",
-      "team_id": "team_white",
-      "handicap": 13.4
-    },
-    {
-      "id": "p4",
-      "name": "Florian Haas",
-      "team_id": "team_black",
-      "handicap": 10.3
-    },
-    {
-      "id": "p5",
-      "name": "Gustavo Salzar",
-      "team_id": "team_white",
-      "handicap": 9.6
-    },
-    {
-      "id": "p6",
-      "name": "Johannes Pfeil",
-      "team_id": "team_blue",
-      "handicap": 11.2
-    },
-    {
-      "id": "p7",
-      "name": "Markus Möllinger",
-      "team_id": "team_white",
-      "handicap": 18.5
-    },
-    {
-      "id": "p8",
-      "name": "Norbert Hofmann",
-      "team_id": "team_black",
-      "handicap": 14.3
-    },
-    {
-      "id": "p9",
       "name": "Patrick Schreiber",
       "team_id": "team_white",
       "handicap": 0.9
     },
     {
-      "id": "p10",
+      "id": "p2",
+      "name": "Gustavo Salzar",
+      "team_id": "team_white",
+      "handicap": 9.6
+    },
+    {
+      "id": "p3",
+      "name": "Alexander Kloiber",
+      "team_id": "team_white",
+      "handicap": 12.7
+    },
+    {
+      "id": "p4",
+      "name": "Markus Möllinger",
+      "team_id": "team_white",
+      "handicap": 18.5
+    },
+    {
+      "id": "p5",
+      "name": "Christoph Strehl",
+      "team_id": "team_blue",
+      "handicap": 5.5
+    },
+    {
+      "id": "p6",
+      "name": "Florian Haas",
+      "team_id": "team_blue",
+      "handicap": 10.3
+    },
+    {
+      "id": "p7",
+      "name": "David Baumgartner",
+      "team_id": "team_blue",
+      "handicap": 13.4
+    },
+    {
+      "id": "p8",
       "name": "Thomas Canek",
       "team_id": "team_blue",
       "handicap": 26.0
+    },
+    {
+      "id": "p9",
+      "name": "Martin Baumgartner",
+      "team_id": "team_black",
+      "handicap": 5.6
+    },
+    {
+      "id": "p10",
+      "name": "Johannes Pfeil",
+      "team_id": "team_black",
+      "handicap": 11.2
     },
     {
       "id": "p11",
@@ -88,9 +88,9 @@
     },
     {
       "id": "p12",
-      "name": "Christoph Strehl",
+      "name": "Norbert Hofmann",
       "team_id": "team_black",
-      "handicap": 5.5
+      "handicap": 14.3
     }
   ],
   "rounds": [
@@ -118,19 +118,19 @@
   ],
   "playing_handicaps": {
     "p1": {
-      "altentann": 15,
-      "eugendorf": 16,
+      "altentann": 13,
+      "eugendorf": 14,
       "gc_blue": 15,
       "gc_green": 15,
       "gc_red": 15,
-      "klessheim": 14,
+      "klessheim": 16,
       "son_gual": 15,
       "tclub_calvia": 15,
       "tclub_palma": 15
     },
     "p2": {
-      "altentann": 7,
-      "eugendorf": 7,
+      "altentann": 5,
+      "eugendorf": 5,
       "gc_blue": 8,
       "gc_green": 8,
       "gc_red": 8,
@@ -140,74 +140,74 @@
       "tclub_palma": 8
     },
     "p3": {
-      "altentann": 16,
-      "eugendorf": 17,
+      "altentann": 14,
+      "eugendorf": 15,
       "gc_blue": 15,
       "gc_green": 15,
       "gc_red": 15,
-      "klessheim": 14,
+      "klessheim": 16,
       "son_gual": 15,
       "tclub_calvia": 15,
       "tclub_palma": 15
     },
     "p4": {
-      "altentann": 12,
-      "eugendorf": 13,
+      "altentann": 10,
+      "eugendorf": 11,
       "gc_blue": 12,
       "gc_green": 12,
       "gc_red": 12,
-      "klessheim": 11,
+      "klessheim": 13,
       "son_gual": 12,
       "tclub_calvia": 12,
       "tclub_palma": 12
     },
     "p5": {
-      "altentann": 12,
-      "eugendorf": 12,
+      "altentann": 10,
+      "eugendorf": 10,
       "gc_blue": 12,
       "gc_green": 12,
       "gc_red": 12,
-      "klessheim": 11,
+      "klessheim": 12,
       "son_gual": 12,
       "tclub_calvia": 12,
       "tclub_palma": 12
     },
     "p6": {
-      "altentann": 13,
-      "eugendorf": 14,
+      "altentann": 11,
+      "eugendorf": 12,
       "gc_blue": 13,
       "gc_green": 13,
       "gc_red": 13,
-      "klessheim": 12,
+      "klessheim": 14,
       "son_gual": 13,
       "tclub_calvia": 13,
       "tclub_palma": 13
     },
     "p7": {
-      "altentann": 22,
-      "eugendorf": 23,
+      "altentann": 20,
+      "eugendorf": 21,
       "gc_blue": 20,
       "gc_green": 20,
       "gc_red": 20,
-      "klessheim": 20,
+      "klessheim": 22,
       "son_gual": 20,
       "tclub_calvia": 20,
       "tclub_palma": 20
     },
     "p8": {
-      "altentann": 17,
-      "eugendorf": 18,
+      "altentann": 15,
+      "eugendorf": 16,
       "gc_blue": 16,
       "gc_green": 16,
       "gc_red": 16,
-      "klessheim": 15,
+      "klessheim": 17,
       "son_gual": 16,
       "tclub_calvia": 16,
       "tclub_palma": 16
     },
     "p9": {
-      "altentann": 2,
-      "eugendorf": 2,
+      "altentann": 0,
+      "eugendorf": 0,
       "gc_blue": 3,
       "gc_green": 3,
       "gc_red": 3,
@@ -217,34 +217,34 @@
       "tclub_palma": 3
     },
     "p10": {
-      "altentann": 30,
-      "eugendorf": 32,
+      "altentann": 28,
+      "eugendorf": 30,
       "gc_blue": 28,
       "gc_green": 28,
       "gc_red": 28,
-      "klessheim": 27,
+      "klessheim": 31,
       "son_gual": 28,
       "tclub_calvia": 28,
       "tclub_palma": 28
     },
     "p11": {
-      "altentann": 16,
-      "eugendorf": 17,
+      "altentann": 14,
+      "eugendorf": 15,
       "gc_blue": 16,
       "gc_green": 16,
       "gc_red": 16,
-      "klessheim": 15,
+      "klessheim": 17,
       "son_gual": 16,
       "tclub_calvia": 16,
       "tclub_palma": 16
     },
     "p12": {
-      "altentann": 7,
-      "eugendorf": 7,
+      "altentann": 5,
+      "eugendorf": 5,
       "gc_blue": 8,
       "gc_green": 8,
       "gc_red": 8,
-      "klessheim": 6,
+      "klessheim": 7,
       "son_gual": 8,
       "tclub_calvia": 8,
       "tclub_palma": 8
