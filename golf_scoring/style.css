@@ -279,7 +279,7 @@ button[data-baseweb="tab"][aria-selected="true"] p, [data-testid="stTabs"] butto
 }
 
 /* Mobile Responsive Scaling */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
     /* Methode 1: Verkleinert die Basis-Schriftgröße (skaliert alle REM-Werte in Streamlit auf 75%) */
     html, body, .stApp, [data-testid="stAppViewContainer"] {
         font-size: 12px !important;
