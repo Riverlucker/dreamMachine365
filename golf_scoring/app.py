@@ -522,8 +522,7 @@ if page == "🏆 Leaderboard":
                 
                 # Render Player Net Table
                 html = "<div class='leaderboard-container'><table class='leaderboard-table'>"
-                team_th = "" if event_id == "race_to_boathouse" else "<th>Team</th>"
-                html += f"<thead><tr><th>Rang</th><th>Spieler</th>{team_th}<th>HCP</th>"
+                html += f"<thead><tr><th>Rang</th><th>Spieler</th><th>HCP</th>"
                 if is_overall:
                     for r in rounds_list:
                         html_details_name = r['name'].replace("Runde ", "R").split(" - ")[0]
@@ -564,10 +563,13 @@ if page == "🏆 Leaderboard":
                         if r_stats.get("holes_played", 0) < max_h:
                             p_active_r_id = r["id"]
                             break
+                    
+                    team_color = p.get('team_color', '#ffffff')
+                    # Use the team color as a background for the player name (same framing as the old team tag)
+                    name_html = f"<span style='background-color:{team_color}; color:#1a2b22; padding:3px 8px; border-radius:6px; border:1px solid rgba(0,0,0,0.1); font-weight:bold; white-space:nowrap;'>{p['name']}</span>"
                     name_link = f"?event={event_id}&v_player={p['id']}&v_round={p_active_r_id}&v_type=netto"
-                    html += f"<td><a href='{name_link}' target='_self' style='text-decoration:none; color:inherit;'><strong>{p['name']}</strong></a></td>"
-                    if event_id != "race_to_boathouse":
-                        html += f"<td>{team_tag}</td>"
+                    
+                    html += f"<td><a href='{name_link}' target='_self' style='text-decoration:none;'>{name_html}</a></td>"
                     html += f"<td>{p['handicap']}</td>"
                 
                     if is_overall:
@@ -619,8 +621,7 @@ if page == "🏆 Leaderboard":
                 
                 # Render Player Gross Table
                 html = "<div class='leaderboard-container'><table class='leaderboard-table'>"
-                team_th = "" if event_id == "race_to_boathouse" else "<th>Team</th>"
-                html += f"<thead><tr><th>Rang</th><th>Spieler</th>{team_th}<th>HCP</th>"
+                html += f"<thead><tr><th>Rang</th><th>Spieler</th><th>HCP</th>"
                 if is_overall:
                     for r in rounds_list:
                         html_details_name = r['name'].replace("Runde ", "R").split(" - ")[0]
@@ -661,10 +662,12 @@ if page == "🏆 Leaderboard":
                         if r_stats.get("holes_played", 0) < max_h:
                             p_active_r_id = r["id"]
                             break
+                    
+                    team_color = p.get('team_color', '#ffffff')
+                    name_html = f"<span style='background-color:{team_color}; color:#1a2b22; padding:3px 8px; border-radius:6px; border:1px solid rgba(0,0,0,0.1); font-weight:bold; white-space:nowrap;'>{p['name']}</span>"
                     name_link = f"?event={event_id}&v_player={p['id']}&v_round={p_active_r_id}&v_type=brutto"
-                    html += f"<td><a href='{name_link}' target='_self' style='text-decoration:none; color:inherit;'><strong>{p['name']}</strong></a></td>"
-                    if event_id != "race_to_boathouse":
-                        html += f"<td>{team_tag}</td>"
+                    
+                    html += f"<td><a href='{name_link}' target='_self' style='text-decoration:none;'>{name_html}</a></td>"
                     html += f"<td>{p['handicap']}</td>"
                 
                     if is_overall:
