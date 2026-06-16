@@ -10,6 +10,40 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
     color: #1a2b22 !important;
 }
 
+/* Radio buttons styled as Pills/Tabs */
+[data-testid="stRadio"] > div {
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+[data-testid="stRadio"] label {
+    padding: 8px 20px;
+    background-color: #eaf4eb !important;
+    border: 1px solid #c2e0cd !important;
+    border-radius: 20px !important;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+[data-testid="stRadio"] label:hover {
+    background-color: #c2e0cd !important;
+}
+[data-testid="stRadio"] div[role="radio"] {
+    display: none !important;
+}
+[data-testid="stRadio"] label p {
+    color: #0d522c !important;
+    font-weight: 600 !important;
+    margin: 0 !important;
+}
+[data-testid="stRadio"] label:has(div[aria-checked="true"]) {
+    background-color: #0d522c !important;
+    border-color: #0d522c !important;
+    box-shadow: 0 4px 10px rgba(13,82,44,0.2) !important;
+}
+[data-testid="stRadio"] label:has(div[aria-checked="true"]) p {
+    color: #ffffff !important;
+}
+
 /* Sidebar Styling */
 [data-testid="stSidebar"] {
     background-color: #ffffff !important;

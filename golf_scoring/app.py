@@ -53,14 +53,12 @@ score_pwd_correct = tournament.get("score_password", "golf")
 
 col1, col2 = st.columns([0.8, 0.2])
 with col1:
-    page = st.pills(
+    page = st.radio(
         "Navigation",
         ["🏆 Leaderboard", "✍️ Scores eingeben", "⚙️ Admin / Setup"],
-        default="🏆 Leaderboard",
+        horizontal=True,
         label_visibility="collapsed"
     )
-    if not page:
-        page = "🏆 Leaderboard"
 with col2:
     if st.session_state["is_admin"] or st.session_state["is_scorer"]:
         if st.button("Abmelden", use_container_width=True):
