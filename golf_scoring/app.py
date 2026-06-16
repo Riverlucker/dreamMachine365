@@ -414,15 +414,15 @@ if page == "🏆 Leaderboard":
                         "players": t["players"]
                     })
                 
-                # Sort teams by points desc, then holes desc
-                key_func = lambda x: (x["points"], x["holes"])
-                team_table_data.sort(key=key_func, reverse=True)
+                # Sort teams by Par-Diff asc, then points desc
+                key_func = lambda x: (x["diff"], -x["points"])
+                team_table_data.sort(key=key_func)
             
                 ranks = []
                 for i, t in enumerate(team_table_data):
                     rank = 1
                     for other in team_table_data:
-                        if key_func(other) > key_func(t):
+                        if key_func(other) < key_func(t):
                             rank += 1
                     is_tied = sum(1 for o in team_table_data if key_func(o) == key_func(t)) > 1
                     rank_str = f"T{rank}" if is_tied else str(rank)
@@ -504,17 +504,17 @@ if page == "🏆 Leaderboard":
                 player_list = list(stats["players"].values())
             
                 if is_overall:
-                    key_func = lambda x: (x["total_net_points"], x["total_holes_played"])
+                    key_func = lambda x: (x["total_net_diff"], -x["total_net_points"])
                 else:
-                    key_func = lambda x: (x["rounds"].get(active_round["id"], {}).get("net_points", 0), x["rounds"].get(active_round["id"], {}).get("holes_played", 0))
+                    key_func = lambda x: (x["rounds"].get(active_round["id"], {}).get("net_diff", 0), -x["rounds"].get(active_round["id"], {}).get("net_points", 0))
                 
-                player_list.sort(key=key_func, reverse=True)
+                player_list.sort(key=key_func)
             
                 ranks = []
                 for i, p in enumerate(player_list):
                     rank = 1
                     for other in player_list:
-                        if key_func(other) > key_func(p):
+                        if key_func(other) < key_func(p):
                             rank += 1
                     is_tied = sum(1 for o in player_list if key_func(o) == key_func(p)) > 1
                     rank_str = f"T{rank}" if is_tied else str(rank)
@@ -617,17 +617,17 @@ if page == "🏆 Leaderboard":
                 player_list = list(stats["players"].values())
             
                 if is_overall:
-                    key_func = lambda x: (x["total_gross_points"], x["total_holes_played"])
+                    key_func = lambda x: (x["total_gross_diff"], -x["total_gross_points"])
                 else:
-                    key_func = lambda x: (x["rounds"].get(active_round["id"], {}).get("gross_points", 0), x["rounds"].get(active_round["id"], {}).get("holes_played", 0))
+                    key_func = lambda x: (x["rounds"].get(active_round["id"], {}).get("gross_diff", 0), -x["rounds"].get(active_round["id"], {}).get("gross_points", 0))
                 
-                player_list.sort(key=key_func, reverse=True)
+                player_list.sort(key=key_func)
             
                 ranks = []
                 for i, p in enumerate(player_list):
                     rank = 1
                     for other in player_list:
-                        if key_func(other) > key_func(p):
+                        if key_func(other) < key_func(p):
                             rank += 1
                     is_tied = sum(1 for o in player_list if key_func(o) == key_func(p)) > 1
                     rank_str = f"T{rank}" if is_tied else str(rank)
