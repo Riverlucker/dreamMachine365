@@ -309,13 +309,6 @@ button[data-baseweb="tab"][aria-selected="true"] p, [data-testid="stTabs"] butto
         font-size: 14.4px !important;
     }
     
-    /* Methode 2: Harter Zoom als Fallback für Container */
-    .stApp {
-        zoom: 0.9;
-        -moz-transform: scale(0.9);
-        -moz-transform-origin: top center;
-    }
-    
     .block-container {
         padding-top: 3.5rem !important; /* Verhindert Verschwinden unter der feststehenden Streamlit Top-Bar */
         padding-left: 0.1rem !important;
