@@ -12,17 +12,21 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
 
 /* Radio buttons styled as Pills/Tabs */
 [data-testid="stRadio"] > div {
-    gap: 15px;
-    justify-content: center;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    justify-content: center !important;
     margin-bottom: 20px;
 }
 [data-testid="stRadio"] label {
-    padding: 8px 20px;
+    padding: 8px 14px;
     background-color: #eaf4eb !important;
     border: 1px solid #c2e0cd !important;
     border-radius: 20px !important;
     cursor: pointer;
     transition: all 0.2s;
+    flex: 0 1 auto !important;
 }
 [data-testid="stRadio"] label:hover {
     background-color: #c2e0cd !important;
@@ -280,20 +284,20 @@ button[data-baseweb="tab"][aria-selected="true"] p, [data-testid="stTabs"] butto
 
 /* Mobile Responsive Scaling */
 @media screen and (max-width: 1024px) {
-    /* Methode 1: Verkleinert die Basis-Schriftgröße (skaliert alle REM-Werte in Streamlit auf 75%) */
+    /* Methode 1: Verkleinert die Basis-Schriftgröße (skaliert alle REM-Werte in Streamlit auf ca 90%) */
     html, body, .stApp, [data-testid="stAppViewContainer"] {
-        font-size: 12px !important;
+        font-size: 14.4px !important;
     }
     
     /* Methode 2: Harter Zoom als Fallback für Container */
     .stApp {
-        zoom: 0.75;
-        -moz-transform: scale(0.75);
+        zoom: 0.9;
+        -moz-transform: scale(0.9);
         -moz-transform-origin: top center;
     }
     
     .block-container {
-        padding-top: 1rem !important;
+        padding-top: 3.5rem !important; /* Verhindert Verschwinden unter der feststehenden Streamlit Top-Bar */
         padding-left: 0.2rem !important;
         padding-right: 0.2rem !important;
         max-width: 100% !important;
