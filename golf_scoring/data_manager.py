@@ -85,6 +85,22 @@ def load_course(course_id: str) -> Optional[dict]:
                 return course
     return None
 
+def apply_course_modifications(courses_cache: dict, event_id: str):
+    """
+    Applies event-specific modifications to the golf courses.
+    For the 45_loch_challenge, Altentann has Hole 5 removed and Hole 6 is Par 4.
+    """
+    if event_id == "45_loch_challenge" and "altentann" in courses_cache:
+        course = courses_cache["altentann"]
+        new_holes = []
+        for h in course.get("holes", []):
+            if h["hole"] == 5:
+                continue  # Remove hole 5
+            if h["hole"] == 6:
+                h["par"] = 4
+            new_holes.append(h)
+        course["holes"] = new_holes
+
 def save_course(course_data: dict) -> bool:
     """Saves a course configuration to courses directory."""
     if "id" not in course_data or "name" not in course_data or "holes" not in course_data:

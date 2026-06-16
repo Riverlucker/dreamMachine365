@@ -163,14 +163,34 @@ def show_scorecard_page(p_id, r_id, tournament_data, scores_data, courses_cache_
         else:
             vorgabe_str = ""
             
-        gross_str = str(gross) if gross > 0 else "-"
-        pts_str = str(net_pts) if gross > 0 else "-"
+        if gross > 0:
+            diff = gross - par
+            score_class = ""
+            if diff <= -2:
+                score_class = "score-eagle"
+            elif diff == -1:
+                score_class = "score-birdie"
+            elif diff == 1:
+                score_class = "score-bogey"
+            elif diff == 2:
+                score_class = "score-double-bogey"
+            elif diff >= 3:
+                score_class = "score-triple-bogey"
+                
+            if score_class:
+                gross_str = f"<div class='score-box {score_class}'><strong>{gross}</strong></div>"
+            else:
+                gross_str = f"<strong>{gross}</strong>"
+            pts_str = str(net_pts)
+        else:
+            gross_str = "-"
+            pts_str = "-"
         
         holes_row.append(str(hole_num))
         par_row.append(str(par))
         idx_row.append(str(idx))
         vorgabe_row.append(vorgabe_str)
-        gross_row.append(f"<strong>{gross_str}</strong>")
+        gross_row.append(gross_str)
         pts_row.append(f"<strong>{pts_str}</strong>")
         
         total_par += par
@@ -192,12 +212,12 @@ def show_scorecard_page(p_id, r_id, tournament_data, scores_data, courses_cache_
     rows = [holes_row, par_row, idx_row, gross_row, pts_row] if str(v_type).lower() == "brutto" else [holes_row, par_row, idx_row, vorgabe_row, gross_row, pts_row]
     for r_idx, row in enumerate(rows):
         # Add slight background to total column and labels
-        bg_color = "rgba(255,255,255,0.05)" if r_idx % 2 == 0 else "transparent"
+        bg_color = "rgba(0,0,0,0.02)" if r_idx % 2 == 0 else "transparent"
         html += f"<tr style='background-color: {bg_color};'>"
         html += f"<td style='text-align:left; font-weight:bold;'>{row[0]}</td>"
         for val in row[1:-1]:
             html += f"<td>{val}</td>"
-        html += f"<td style='background-color: rgba(255,255,255,0.08);'>{row[-1]}</td>"
+        html += f"<td style='background-color: rgba(0,0,0,0.04);'>{row[-1]}</td>"
         html += "</tr>"
         
     html += "</table></div>"
@@ -218,6 +238,7 @@ if page == "🏆 Leaderboard":
     # Load all courses into cache
     courses = data_manager.list_courses()
     courses_cache = {c["id"]: c for c in courses}
+    data_manager.apply_course_modifications(courses_cache, event_id)
     
     # Check for scorecard dialog request
     v_player = st.query_params.get("v_player")
@@ -403,7 +424,7 @@ if page == "🏆 Leaderboard":
             
                 # Render Team Table
                 html = "<div class='leaderboard-container'><table class='leaderboard-table'>"
-                html += "<thead><tr><th>Rang</th><th>Team</th><th>Löcher</th><th style='background-color:rgba(255,255,255,0.05); text-align:center;'>Netto Par-Diff</th></tr></thead><tbody>"
+                html += "<thead><tr><th>Rang</th><th>Team</th><th>Löcher</th><th style='background-color:rgba(0,0,0,0.03); text-align:center;'>Netto Par-Diff</th></tr></thead><tbody>"
                 for i, team_item in enumerate(team_table_data):
                     rank, rank_str = ranks[i]
                     rank_class = f"rank-{rank}" if rank <= 3 else "rank-other"
@@ -422,7 +443,7 @@ if page == "🏆 Leaderboard":
                     html += f"<td><span class='rank-badge {rank_class}'>{rank_str}</span></td>"
                     html += f"<td><span class='team-tag' style='background-color:{team_item['color']}'>{team_item['name']}</span></td>"
                     html += f"<td>{holes_str}</td>"
-                    html += f"<td style='background-color:rgba(255,255,255,0.05); border-left:1px solid rgba(255,255,255,0.1); text-align:center;'><strong style='font-size:1.1rem; color:#e2e8f0;'>{diff_str}</strong> <span style='font-size:0.8rem;color:#888'>({team_item['points']} Pkt)</span></td>"
+                    html += f"<td style='background-color:rgba(0,0,0,0.03); border-left:1px solid rgba(0,0,0,0.05); text-align:center;'><strong style='font-size:1.1rem; color:#1a2b22;'>{diff_str}</strong> <span style='font-size:0.8rem;color:#666'>({team_item['points']} Pkt)</span></td>"
                     html += "</tr>"
                 html += "</tbody></table></div>"
                 st.markdown(html, unsafe_allow_html=True)
@@ -501,9 +522,9 @@ if page == "🏆 Leaderboard":
                     for r in rounds_list:
                         html_details_name = r['name'].replace("Runde ", "R").split(" - ")[0]
                         html += f"<th>{html_details_name}</th>"
-                    html += "<th>Gesamt Pkt</th><th>Löcher</th><th style='background-color:rgba(255,255,255,0.05); text-align:center;'>Netto Par-Diff</th></tr></thead><tbody>"
+                    html += "<th>Gesamt Pkt</th><th>Löcher</th><th style='background-color:rgba(0,0,0,0.03); text-align:center;'>Netto Par-Diff</th></tr></thead><tbody>"
                 else:
-                    html += f"<th>Punkte</th><th>Löcher</th><th style='background-color:rgba(255,255,255,0.05); text-align:center;'>Netto Par-Diff</th></tr></thead><tbody>"
+                    html += f"<th>Punkte</th><th>Löcher</th><th style='background-color:rgba(0,0,0,0.03); text-align:center;'>Netto Par-Diff</th></tr></thead><tbody>"
                 
                 for i, p in enumerate(player_list):
                     rank, rank_str = ranks[i]
@@ -557,7 +578,7 @@ if page == "🏆 Leaderboard":
                     
                     holes_str = f"{holes_played} / {max_holes_player}"
                     html += f"<td>{holes_str}</td>"
-                    html += f"<td style='background-color:rgba(255,255,255,0.05); border-left:1px solid rgba(255,255,255,0.1); text-align:center;'><strong style='font-size:1.1rem; color:#e2e8f0;'>{diff_str}</strong></td>"
+                    html += f"<td style='background-color:rgba(0,0,0,0.03); border-left:1px solid rgba(0,0,0,0.05); text-align:center;'><strong style='font-size:1.1rem; color:#1a2b22;'>{diff_str}</strong></td>"
                     html += "</tr>"
                 
                 html += "</tbody></table></div>"
@@ -598,9 +619,9 @@ if page == "🏆 Leaderboard":
                     for r in rounds_list:
                         html_details_name = r['name'].replace("Runde ", "R").split(" - ")[0]
                         html += f"<th>{html_details_name}</th>"
-                    html += "<th>Gesamt Pkt</th><th>Löcher</th><th style='background-color:rgba(255,255,255,0.05); text-align:center;'>Brutto Par-Diff</th></tr></thead><tbody>"
+                    html += "<th>Gesamt Pkt</th><th>Löcher</th><th style='background-color:rgba(0,0,0,0.03); text-align:center;'>Brutto Par-Diff</th></tr></thead><tbody>"
                 else:
-                    html += f"<th>Punkte</th><th>Löcher</th><th style='background-color:rgba(255,255,255,0.05); text-align:center;'>Brutto Par-Diff</th></tr></thead><tbody>"
+                    html += f"<th>Punkte</th><th>Löcher</th><th style='background-color:rgba(0,0,0,0.03); text-align:center;'>Brutto Par-Diff</th></tr></thead><tbody>"
                 
                 for i, p in enumerate(player_list):
                     rank, rank_str = ranks[i]
@@ -654,7 +675,7 @@ if page == "🏆 Leaderboard":
                     
                     holes_str = f"{holes_played} / {max_holes_player}"
                     html += f"<td>{holes_str}</td>"
-                    html += f"<td style='background-color:rgba(255,255,255,0.05); border-left:1px solid rgba(255,255,255,0.1); text-align:center;'><strong style='font-size:1.1rem; color:#e2e8f0;'>{diff_str}</strong></td>"
+                    html += f"<td style='background-color:rgba(0,0,0,0.03); border-left:1px solid rgba(0,0,0,0.05); text-align:center;'><strong style='font-size:1.1rem; color:#1a2b22;'>{diff_str}</strong></td>"
                     html += "</tr>"
                 
                 html += "</tbody></table></div>"
@@ -772,6 +793,7 @@ elif page == "✍️ Scores eingeben":
             # Load courses list
             courses = data_manager.list_courses()
             courses_cache = {c["id"]: c for c in courses}
+            data_manager.apply_course_modifications(courses_cache, event_id)
         
             if not tournament.get("rounds"):
                 st.warning("Keine Runden konfiguriert. Bitte im Admin-Bereich einrichten.")
