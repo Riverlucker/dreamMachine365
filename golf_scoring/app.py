@@ -430,7 +430,7 @@ if page == "🏆 Leaderboard":
             
                 # Render Team Table
                 html = "<div class='leaderboard-container'><table class='leaderboard-table'>"
-                html += "<thead><tr><th>Rang</th><th>Team</th><th>Löcher</th><th style='background-color:rgba(0,0,0,0.03); text-align:center;'>Netto Par-Diff</th></tr></thead><tbody>"
+                html += "<thead><tr><th>Rang</th><th>Team</th><th>Löcher</th><th style='background-color:rgba(0,0,0,0.03); text-align:center; color:#0d522c; font-weight:900;'>PAR-DIFF</th></tr></thead><tbody>"
                 for i, team_item in enumerate(team_table_data):
                     rank, rank_str = ranks[i]
                     rank_class = f"rank-{rank}" if rank <= 3 else "rank-other"
@@ -449,7 +449,7 @@ if page == "🏆 Leaderboard":
                     html += f"<td><span class='rank-badge {rank_class}'>{rank_str}</span></td>"
                     html += f"<td><span class='team-tag' style='background-color:{team_item['color']}'>{team_item['name']}</span></td>"
                     html += f"<td>{holes_str}</td>"
-                    html += f"<td style='background-color:rgba(0,0,0,0.03); border-left:1px solid rgba(0,0,0,0.05); text-align:center;'><strong style='font-size:1.1rem; color:#1a2b22;'>{diff_str}</strong> <span style='font-size:0.8rem;color:#666'>({team_item['points']} Pkt)</span></td>"
+                    html += f"<td style='background-color:rgba(0,0,0,0.03); border-left:1px solid rgba(0,0,0,0.05); text-align:center;'><strong style='font-size:1.25rem; font-weight:900; color:#1a2b22;'>{diff_str}</strong> <br><span style='font-size:0.75rem;color:#666'>({team_item['points']} Pkt)</span></td>"
                     html += "</tr>"
                 html += "</tbody></table></div>"
                 st.markdown(html, unsafe_allow_html=True)
@@ -528,9 +528,9 @@ if page == "🏆 Leaderboard":
                     for r in rounds_list:
                         html_details_name = r['name'].replace("Runde ", "R").split(" - ")[0]
                         html += f"<th>{html_details_name}</th>"
-                    html += "<th>Gesamt Pkt</th><th>Löcher</th><th style='background-color:rgba(0,0,0,0.03); text-align:center;'>Netto Par-Diff</th></tr></thead><tbody>"
+                    html += "<th>GES</th><th>Löcher</th><th style='background-color:rgba(0,0,0,0.03); text-align:center; color:#0d522c; font-weight:900;'>PAR-DIFF</th></tr></thead><tbody>"
                 else:
-                    html += f"<th>Punkte</th><th>Löcher</th><th style='background-color:rgba(0,0,0,0.03); text-align:center;'>Netto Par-Diff</th></tr></thead><tbody>"
+                    html += f"<th>Punkte</th><th>Löcher</th><th style='background-color:rgba(0,0,0,0.03); text-align:center; color:#0d522c; font-weight:900;'>PAR-DIFF</th></tr></thead><tbody>"
                 
                 for i, p in enumerate(player_list):
                     rank, rank_str = ranks[i]
@@ -584,7 +584,7 @@ if page == "🏆 Leaderboard":
                     
                     holes_str = f"{holes_played} / {max_holes_player}"
                     html += f"<td>{holes_str}</td>"
-                    html += f"<td style='background-color:rgba(0,0,0,0.03); border-left:1px solid rgba(0,0,0,0.05); text-align:center;'><strong style='font-size:1.1rem; color:#1a2b22;'>{diff_str}</strong></td>"
+                    html += f"<td style='background-color:rgba(0,0,0,0.03); border-left:1px solid rgba(0,0,0,0.05); text-align:center;'><strong style='font-size:1.25rem; font-weight:900; color:#1a2b22;'>{diff_str}</strong></td>"
                     html += "</tr>"
                 
                 html += "</tbody></table></div>"
@@ -625,9 +625,9 @@ if page == "🏆 Leaderboard":
                     for r in rounds_list:
                         html_details_name = r['name'].replace("Runde ", "R").split(" - ")[0]
                         html += f"<th>{html_details_name}</th>"
-                    html += "<th>Gesamt Pkt</th><th>Löcher</th><th style='background-color:rgba(0,0,0,0.03); text-align:center;'>Brutto Par-Diff</th></tr></thead><tbody>"
+                    html += "<th>GES</th><th>Löcher</th><th style='background-color:rgba(0,0,0,0.03); text-align:center; color:#0d522c; font-weight:900;'>PAR-DIFF</th></tr></thead><tbody>"
                 else:
-                    html += f"<th>Punkte</th><th>Löcher</th><th style='background-color:rgba(0,0,0,0.03); text-align:center;'>Brutto Par-Diff</th></tr></thead><tbody>"
+                    html += f"<th>Punkte</th><th>Löcher</th><th style='background-color:rgba(0,0,0,0.03); text-align:center; color:#0d522c; font-weight:900;'>PAR-DIFF</th></tr></thead><tbody>"
                 
                 for i, p in enumerate(player_list):
                     rank, rank_str = ranks[i]
@@ -681,7 +681,7 @@ if page == "🏆 Leaderboard":
                     
                     holes_str = f"{holes_played} / {max_holes_player}"
                     html += f"<td>{holes_str}</td>"
-                    html += f"<td style='background-color:rgba(0,0,0,0.03); border-left:1px solid rgba(0,0,0,0.05); text-align:center;'><strong style='font-size:1.1rem; color:#1a2b22;'>{diff_str}</strong></td>"
+                    html += f"<td style='background-color:rgba(0,0,0,0.03); border-left:1px solid rgba(0,0,0,0.05); text-align:center;'><strong style='font-size:1.25rem; font-weight:900; color:#1a2b22;'>{diff_str}</strong></td>"
                     html += "</tr>"
                 
                 html += "</tbody></table></div>"
