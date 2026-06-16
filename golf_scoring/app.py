@@ -1223,9 +1223,18 @@ elif page == "⚙️ Admin":
                     ts_formatted = ts_raw
                     try:
                         import datetime
-                        dt = datetime.datetime.fromisoformat(ts_raw)
+                        # Replace Z with +00:00 for strict ISO format parsing
+                        dt = datetime.datetime.fromisoformat(ts_raw.replace("Z", "+00:00"))
+                        if dt.tzinfo is None:
+                            dt = dt.replace(tzinfo=datetime.timezone.utc)
+                        try:
+                            import zoneinfo
+                            dt = dt.astimezone(zoneinfo.ZoneInfo("Europe/Berlin"))
+                        except:
+                            # Fallback if zoneinfo is missing (CEST offset)
+                            dt = dt + datetime.timedelta(hours=2)
                         ts_formatted = dt.strftime("%d.%m.%y %H:%M")
-                    except:
+                    except Exception as e:
                         pass
                 
                     user = entry.get("username", "Unbekannt")
