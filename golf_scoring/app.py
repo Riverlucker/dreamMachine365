@@ -565,8 +565,22 @@ if page == "🏆 Leaderboard":
                             break
                     
                     team_color = p.get('team_color', '#ffffff')
-                    # Use the team color as a background for the player name (same framing as the old team tag)
-                    name_html = f"<span style='background-color:{team_color}; color:#1a2b22; padding:3px 8px; border-radius:6px; border:1px solid rgba(0,0,0,0.1); font-weight:bold; white-space:nowrap;'>{p['name']}</span>"
+                    
+                    # Calculate contrast color for text
+                    text_color = "#1a2b22"
+                    if team_color.startswith("#") and len(team_color) >= 7:
+                        try:
+                            h = team_color.lstrip('#')
+                            r, g, b = tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
+                            luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+                            if luminance < 0.5:
+                                text_color = "#ffffff"
+                        except: pass
+                        
+                    name_display = p['name'].replace(' ', '<br>', 1)
+                    
+                    # Use the team color as a background for the player name
+                    name_html = f"<span style='background-color:{team_color}; color:{text_color}; display:block; text-align:center; padding:4px 6px; border-radius:6px; border:1px solid rgba(0,0,0,0.1); font-weight:bold; line-height:1.2;'>{name_display}</span>"
                     name_link = f"?event={event_id}&v_player={p['id']}&v_round={p_active_r_id}&v_type=netto"
                     
                     html += f"<td><a href='{name_link}' target='_self' style='text-decoration:none;'>{name_html}</a></td>"
@@ -664,7 +678,21 @@ if page == "🏆 Leaderboard":
                             break
                     
                     team_color = p.get('team_color', '#ffffff')
-                    name_html = f"<span style='background-color:{team_color}; color:#1a2b22; padding:3px 8px; border-radius:6px; border:1px solid rgba(0,0,0,0.1); font-weight:bold; white-space:nowrap;'>{p['name']}</span>"
+                    
+                    # Calculate contrast color for text
+                    text_color = "#1a2b22"
+                    if team_color.startswith("#") and len(team_color) >= 7:
+                        try:
+                            h = team_color.lstrip('#')
+                            r, g, b = tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
+                            luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+                            if luminance < 0.5:
+                                text_color = "#ffffff"
+                        except: pass
+                        
+                    name_display = p['name'].replace(' ', '<br>', 1)
+                    
+                    name_html = f"<span style='background-color:{team_color}; color:{text_color}; display:block; text-align:center; padding:4px 6px; border-radius:6px; border:1px solid rgba(0,0,0,0.1); font-weight:bold; line-height:1.2;'>{name_display}</span>"
                     name_link = f"?event={event_id}&v_player={p['id']}&v_round={p_active_r_id}&v_type=brutto"
                     
                     html += f"<td><a href='{name_link}' target='_self' style='text-decoration:none;'>{name_html}</a></td>"
