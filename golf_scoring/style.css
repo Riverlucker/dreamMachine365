@@ -13,7 +13,7 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
 /* Radio buttons styled as Pills/Tabs */
 [data-testid="stRadio"] {
     background-color: #eaf4eb; /* Hebe den Teil farblich ab */
-    padding: 10px;
+    padding: 8px;
     border-radius: 12px;
     margin-bottom: 20px;
     border: 1px solid #c2e0cd;
@@ -22,38 +22,38 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
 [data-testid="stRadio"] div[role="radiogroup"] {
     display: flex !important;
     flex-direction: row !important;
-    flex-wrap: wrap !important;
-    gap: 8px !important;
+    flex-wrap: nowrap !important; /* DO NOT WRAP */
+    gap: 4px !important;
     justify-content: center !important;
+    overflow-x: auto; /* Allow slight scroll if extremely small */
 }
 [data-testid="stRadio"] label {
-    padding: 6px 12px !important;
+    padding: 6px 8px !important; /* Minimal padding */
     background-color: #ffffff !important;
     border: 1px solid #c2e0cd !important;
     border-radius: 8px !important;
     cursor: pointer;
     transition: all 0.2s;
-    flex: 0 1 auto !important;
+    flex: 1 1 auto !important; /* Grow and shrink equally */
+    text-align: center;
+    justify-content: center;
 }
 [data-testid="stRadio"] label:hover {
     background-color: #f4f7f5 !important;
 }
 
-/* Aggressively hide the radio circles */
-[data-testid="stRadio"] div[role="radio"],
-[data-testid="stRadio"] span[data-baseweb="radio"],
-[data-testid="stRadio"] input[type="radio"] {
+/* Aggressively hide the radio circles - 100% reliable method */
+[data-testid="stRadio"] label > div:first-child:not([data-testid="stMarkdownContainer"]) {
     display: none !important;
-    width: 0 !important;
-    margin: 0 !important;
 }
 
 [data-testid="stRadio"] label p {
     color: #0d522c !important;
-    font-size: 0.8rem !important; /* Smaller text to fit side-by-side */
-    font-weight: 600 !important;
+    font-size: 0.8rem !important; /* Smaller text */
+    font-weight: 700 !important;
     margin: 0 !important;
     white-space: nowrap !important; /* Prevent wrapping */
+    letter-spacing: -0.3px !important;
 }
 
 /* Selected State */
