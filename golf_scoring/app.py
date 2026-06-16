@@ -49,16 +49,18 @@ admin_pwd_correct = tournament.get("admin_password", "admin")
 score_pwd_correct = tournament.get("score_password", "golf")
 
 # Top Navigation
-st.markdown("<h2 style='text-align: center; padding-top: 0; margin-top: -30px;'>⛳ GolfScore Live</h2>", unsafe_allow_html=True)
+# Top Navigation
 
 col1, col2 = st.columns([0.8, 0.2])
 with col1:
-    page = st.radio(
+    page = st.pills(
         "Navigation",
         ["🏆 Leaderboard", "✍️ Scores eingeben", "⚙️ Admin / Setup"],
-        horizontal=True,
+        default="🏆 Leaderboard",
         label_visibility="collapsed"
     )
+    if not page:
+        page = "🏆 Leaderboard"
 with col2:
     if st.session_state["is_admin"] or st.session_state["is_scorer"]:
         if st.button("Abmelden", use_container_width=True):
@@ -218,7 +220,7 @@ def show_scorecard_page(p_id, r_id, tournament_data, scores_data, courses_cache_
     rows = [holes_row, par_row, idx_row, gross_row, pts_row] if str(v_type).lower() == "brutto" else [holes_row, par_row, idx_row, vorgabe_row, gross_row, pts_row]
     for r_idx, row in enumerate(rows):
         # Add slight background to total column and labels
-        bg_color = "rgba(0,0,0,0.02)" if r_idx % 2 == 0 else "transparent"
+        bg_color = "rgba(0,0,0,0.06)" if r_idx % 2 == 0 else "rgba(0,0,0,0.01)"
         html += f"<tr style='background-color: {bg_color};'>"
         html += f"<td style='text-align:left; font-weight:bold;'>{row[0]}</td>"
         for val in row[1:-1]:
@@ -864,8 +866,8 @@ elif page == "✍️ Scores eingeben":
                     with col_curr:
                         header_html = (
                             f"<div style='text-align: center; line-height: 1.1;'>"
-                            f"<h3 style='margin: 0; padding: 0; color: #f1cf6d;'>Loch {selected_hole} &mdash; Par {hole_info['par']}</h3>"
-                            f"<p style='color: #92a498; margin: 0; padding: 0; font-size: 0.9rem;'>Index {hole_info['index']}</p>"
+                            f"<h3 style='margin: 0; padding: 0; color: #0d522c;'>Loch {selected_hole} &mdash; Par {hole_info['par']}</h3>"
+                            f"<p style='color: #4a5c50; margin: 0; padding: 0; font-size: 0.9rem;'>Index {hole_info['index']}</p>"
                             f"</div>"
                         )
                         st.markdown(header_html, unsafe_allow_html=True)
@@ -954,7 +956,7 @@ elif page == "✍️ Scores eingeben":
                                      label_html = (
                                          f"<div style='margin-top: 5px; display: flex; justify-content: space-between; align-items: center;'>"
                                          f"<div>"
-                                         f"<strong style='font-size: 1.1rem; color: #fff;'>{p['name']}</strong><br/>"
+                                         f"<strong style='font-size: 1.1rem; color: #0d522c;'>{p['name']}</strong><br/>"
                                          f"<span class='team-tag' style='background-color: {p_team['color']}'>{p_team['name']}</span>"
                                          f"<span style='font-size: 0.8rem; color: #92a498;'>Spielvorgabe: {playing_hcp}</span>"
                                          f"</div>"
@@ -972,10 +974,28 @@ elif page == "✍️ Scores eingeben":
                                 with c_score:
                                     if existing_val > 0:
                                         net_pts, _ = scoring.calculate_stableford_points(existing_val, par, hcp_strokes)
-                                        display_val = "/" if net_pts == 0 else str(existing_val)
+                                        diff = existing_val - par
+                                        score_class = ""
+                                        if diff <= -2:
+                                            score_class = "score-eagle"
+                                        elif diff == -1:
+                                            score_class = "score-birdie"
+                                        elif diff == 1:
+                                            score_class = "score-bogey"
+                                        elif diff == 2:
+                                            score_class = "score-double-bogey"
+                                        elif diff >= 3:
+                                            score_class = "score-triple-bogey"
+
+                                        if score_class:
+                                            base_val = f"<div class='score-box {score_class}' style='width: 32px; height: 32px;'>{existing_val}</div>"
+                                        else:
+                                            base_val = f"{existing_val}"
+
+                                        display_val = f"{base_val} <span style='font-size:1rem; color:#c62828;'>/</span>" if net_pts == 0 else base_val
                                     else:
                                         display_val = "-"
-                                    st.markdown(f"<div style='text-align:center; font-size:1.5rem; font-weight:bold; margin-top:5px;'>{display_val}</div>", unsafe_allow_html=True)
+                                    st.markdown(f"<div style='text-align:center; font-size:1.5rem; font-weight:bold; margin-top:5px; display:flex; justify-content:center; align-items:center;'>{display_val}</div>", unsafe_allow_html=True)
                                 with c_plus:
                                     if st.button("➕", key=f"plus_{p_id}_{selected_hole}", use_container_width=True):
                                         new_val = par if existing_val == 0 else existing_val + 1
