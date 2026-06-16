@@ -277,3 +277,21 @@ button[data-baseweb="tab"][aria-selected="true"] p, [data-testid="stTabs"] butto
     margin: 5px auto;
     font-size: 0.85em;
 }
+
+/* Mobile Responsive Scaling */
+@media screen and (max-width: 768px) {
+    body {
+        zoom: 0.75; /* Scales the entire app to 75% on mobile */
+    }
+    
+    .block-container {
+        padding-top: 1rem !important;
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+        max-width: 100% !important;
+    }
+    
+    .leaderboard-table th, .leaderboard-table td {
+        padding: 8px 6px !important; /* Less padding in tables to fit more */
+    }
+}
