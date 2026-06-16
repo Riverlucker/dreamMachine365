@@ -55,7 +55,7 @@ col1, col2 = st.columns([0.8, 0.2])
 with col1:
     page = st.radio(
         "Navigation",
-        ["🏆 Leaderboard", "✍️ Scores eingeben", "⚙️ Admin / Setup"],
+        ["🏆 Leaderboard", "✍️ Scores eingeben", "⚙️ Admin"],
         horizontal=True,
         label_visibility="collapsed"
     )
@@ -1003,7 +1003,7 @@ elif page == "✍️ Scores eingeben":
                             st.markdown("</div>", unsafe_allow_html=True)
 
     # ----------------- ⚙️ ADMIN PAGE -----------------
-elif page == "⚙️ Admin / Setup":
+elif page == "⚙️ Admin":
     if check_password("admin"):
         st.title("⚙️ Admin & Setup")
     

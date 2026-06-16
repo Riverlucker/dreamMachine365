@@ -11,40 +11,60 @@ html, body, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
 }
 
 /* Radio buttons styled as Pills/Tabs */
-[data-testid="stRadio"] > div {
+[data-testid="stRadio"] {
+    background-color: #eaf4eb; /* Hebe den Teil farblich ab */
+    padding: 10px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #c2e0cd;
+}
+[data-testid="stRadio"] > div,
+[data-testid="stRadio"] div[role="radiogroup"] {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: wrap !important;
     gap: 8px !important;
     justify-content: center !important;
-    margin-bottom: 20px;
 }
 [data-testid="stRadio"] label {
-    padding: 8px 14px;
-    background-color: #eaf4eb !important;
+    padding: 6px 12px !important;
+    background-color: #ffffff !important;
     border: 1px solid #c2e0cd !important;
-    border-radius: 20px !important;
+    border-radius: 8px !important;
     cursor: pointer;
     transition: all 0.2s;
     flex: 0 1 auto !important;
 }
 [data-testid="stRadio"] label:hover {
-    background-color: #c2e0cd !important;
+    background-color: #f4f7f5 !important;
 }
-[data-testid="stRadio"] div[role="radio"] {
+
+/* Aggressively hide the radio circles */
+[data-testid="stRadio"] div[role="radio"],
+[data-testid="stRadio"] span[data-baseweb="radio"],
+[data-testid="stRadio"] input[type="radio"] {
     display: none !important;
-}
-[data-testid="stRadio"] label p {
-    color: #0d522c !important;
-    font-weight: 600 !important;
+    width: 0 !important;
     margin: 0 !important;
 }
-[data-testid="stRadio"] label:has(div[aria-checked="true"]) {
+
+[data-testid="stRadio"] label p {
+    color: #0d522c !important;
+    font-size: 0.8rem !important; /* Smaller text to fit side-by-side */
+    font-weight: 600 !important;
+    margin: 0 !important;
+    white-space: nowrap !important; /* Prevent wrapping */
+}
+
+/* Selected State */
+[data-testid="stRadio"] label:has(div[aria-checked="true"]),
+[data-testid="stRadio"] label:has(input:checked) {
     background-color: #0d522c !important;
     border-color: #0d522c !important;
     box-shadow: 0 4px 10px rgba(13,82,44,0.2) !important;
 }
-[data-testid="stRadio"] label:has(div[aria-checked="true"]) p {
+[data-testid="stRadio"] label:has(div[aria-checked="true"]) p,
+[data-testid="stRadio"] label:has(input:checked) p {
     color: #ffffff !important;
 }
 
