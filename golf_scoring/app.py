@@ -430,7 +430,7 @@ if page == "🏆 Leaderboard":
             
                 # Render Team Table
                 html = "<div class='leaderboard-container'><table class='leaderboard-table'>"
-                html += "<thead><tr><th>Rang</th><th>Team</th><th>Löcher</th><th style='background-color:rgba(0,0,0,0.03); text-align:center; color:#0d522c; font-weight:900;'>PAR-DIFF</th></tr></thead><tbody>"
+                html += "<thead><tr><th>Rang</th><th>Team</th><th>Loch</th><th style='background-color:rgba(0,0,0,0.03); text-align:center; color:#0d522c; font-weight:900;'>PAR-DIFF</th></tr></thead><tbody>"
                 for i, team_item in enumerate(team_table_data):
                     rank, rank_str = ranks[i]
                     rank_class = f"rank-{rank}" if rank <= 3 else "rank-other"
@@ -527,9 +527,9 @@ if page == "🏆 Leaderboard":
                     for r in rounds_list:
                         html_details_name = r['name'].replace("Runde ", "R").split(" - ")[0]
                         html += f"<th>{html_details_name}</th>"
-                    html += "<th>GES</th><th>Löcher</th><th style='background-color:rgba(0,0,0,0.03); text-align:center; color:#0d522c; font-weight:900;'>PAR-DIFF</th></tr></thead><tbody>"
+                    html += "<th>GES</th><th>Loch</th><th style='background-color:rgba(0,0,0,0.03); text-align:center; color:#0d522c; font-weight:900;'>PAR-DIFF</th></tr></thead><tbody>"
                 else:
-                    html += f"<th>Punkte</th><th>Löcher</th><th style='background-color:rgba(0,0,0,0.03); text-align:center; color:#0d522c; font-weight:900;'>PAR-DIFF</th></tr></thead><tbody>"
+                    html += f"<th>Punkte</th><th>Loch</th><th style='background-color:rgba(0,0,0,0.03); text-align:center; color:#0d522c; font-weight:900;'>PAR-DIFF</th></tr></thead><tbody>"
                 
                 for i, p in enumerate(player_list):
                     rank, rank_str = ranks[i]
@@ -640,9 +640,9 @@ if page == "🏆 Leaderboard":
                     for r in rounds_list:
                         html_details_name = r['name'].replace("Runde ", "R").split(" - ")[0]
                         html += f"<th>{html_details_name}</th>"
-                    html += "<th>GES</th><th>Löcher</th><th style='background-color:rgba(0,0,0,0.03); text-align:center; color:#0d522c; font-weight:900;'>PAR-DIFF</th></tr></thead><tbody>"
+                    html += "<th>GES</th><th>Loch</th><th style='background-color:rgba(0,0,0,0.03); text-align:center; color:#0d522c; font-weight:900;'>PAR-DIFF</th></tr></thead><tbody>"
                 else:
-                    html += f"<th>Punkte</th><th>Löcher</th><th style='background-color:rgba(0,0,0,0.03); text-align:center; color:#0d522c; font-weight:900;'>PAR-DIFF</th></tr></thead><tbody>"
+                    html += f"<th>Punkte</th><th>Loch</th><th style='background-color:rgba(0,0,0,0.03); text-align:center; color:#0d522c; font-weight:900;'>PAR-DIFF</th></tr></thead><tbody>"
                 
                 for i, p in enumerate(player_list):
                     rank, rank_str = ranks[i]

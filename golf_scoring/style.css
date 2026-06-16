@@ -318,9 +318,21 @@ button[data-baseweb="tab"][aria-selected="true"] p, [data-testid="stTabs"] butto
     
     .block-container {
         padding-top: 3.5rem !important; /* Verhindert Verschwinden unter der feststehenden Streamlit Top-Bar */
-        padding-left: 0.2rem !important;
-        padding-right: 0.2rem !important;
+        padding-left: 0.1rem !important;
+        padding-right: 0.1rem !important;
         max-width: 100% !important;
+    }
+
+    .golf-card {
+        padding: 6px !important;
+        border-radius: 8px !important;
+        border: none !important;
+    }
+    
+    .leaderboard-container {
+        border-radius: 6px !important;
+        border-left: none !important;
+        border-right: none !important;
     }
     
     .leaderboard-table th, .leaderboard-table td {
