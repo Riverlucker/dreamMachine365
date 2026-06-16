@@ -280,18 +280,27 @@ button[data-baseweb="tab"][aria-selected="true"] p, [data-testid="stTabs"] butto
 
 /* Mobile Responsive Scaling */
 @media screen and (max-width: 768px) {
-    body {
-        zoom: 0.75; /* Scales the entire app to 75% on mobile */
+    /* Methode 1: Verkleinert die Basis-Schriftgröße (skaliert alle REM-Werte in Streamlit auf 75%) */
+    html, body, .stApp, [data-testid="stAppViewContainer"] {
+        font-size: 12px !important;
+    }
+    
+    /* Methode 2: Harter Zoom als Fallback für Container */
+    .stApp {
+        zoom: 0.75;
+        -moz-transform: scale(0.75);
+        -moz-transform-origin: top center;
     }
     
     .block-container {
         padding-top: 1rem !important;
-        padding-left: 0.5rem !important;
-        padding-right: 0.5rem !important;
+        padding-left: 0.2rem !important;
+        padding-right: 0.2rem !important;
         max-width: 100% !important;
     }
     
     .leaderboard-table th, .leaderboard-table td {
-        padding: 8px 6px !important; /* Less padding in tables to fit more */
+        padding: 6px 4px !important; /* Less padding in tables to fit more */
+        font-size: 0.85rem !important;
     }
 }
