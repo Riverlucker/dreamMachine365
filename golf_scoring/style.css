@@ -49,9 +49,9 @@ h1 {
     width: 100%;
     overflow-x: auto;
     border-radius: 12px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    background: #ffffff;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    border: 1px solid #d4ebd9;
+    background: #f7fbf8;
+    box-shadow: 0 2px 10px rgba(13,82,44,0.05);
 }
 
 .leaderboard-table {
@@ -141,6 +141,17 @@ h1 {
     padding: 10px 15px;
     margin-bottom: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+/* Tab visibility overrides */
+button[data-baseweb="tab"] p, [data-testid="stTabs"] button p {
+    color: #1a2b22 !important;
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+}
+button[data-baseweb="tab"][aria-selected="true"] p, [data-testid="stTabs"] button[aria-selected="true"] p {
+    color: #0d522c !important;
+    font-weight: 800 !important;
 }
 
 .player-info-container {

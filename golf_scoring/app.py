@@ -48,19 +48,25 @@ if not tournament:
 admin_pwd_correct = tournament.get("admin_password", "admin")
 score_pwd_correct = tournament.get("score_password", "golf")
 
-# Sidebar navigation
-st.sidebar.markdown("## ⛳ GolfScore Live")
-page = st.sidebar.radio(
-    "Navigation",
-    ["🏆 Leaderboard", "✍️ Scores eingeben", "⚙️ Admin / Setup"]
-)
+# Top Navigation
+st.markdown("<h2 style='text-align: center; padding-top: 0; margin-top: -30px;'>⛳ GolfScore Live</h2>", unsafe_allow_html=True)
 
-# Admin Logout button
-if st.session_state["is_admin"] or st.session_state["is_scorer"]:
-    if st.sidebar.button("Abmelden"):
-        st.session_state["is_admin"] = False
-        st.session_state["is_scorer"] = False
-        st.rerun()
+col1, col2 = st.columns([0.8, 0.2])
+with col1:
+    page = st.radio(
+        "Navigation",
+        ["🏆 Leaderboard", "✍️ Scores eingeben", "⚙️ Admin / Setup"],
+        horizontal=True,
+        label_visibility="collapsed"
+    )
+with col2:
+    if st.session_state["is_admin"] or st.session_state["is_scorer"]:
+        if st.button("Abmelden", use_container_width=True):
+            st.session_state["is_admin"] = False
+            st.session_state["is_scorer"] = False
+            st.rerun()
+
+st.markdown("<hr style='margin-top: 5px; margin-bottom: 15px;'/>", unsafe_allow_html=True)
 
 # ----------------- AUTHENTICATION HELPER -----------------
 def check_password(role="scorer"):
