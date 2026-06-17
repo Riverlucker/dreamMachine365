@@ -887,7 +887,22 @@ elif page == "✍️ Scores eingeben":
             else:
                 rounds_list = sorted(tournament["rounds"], key=lambda x: x.get("sequence", 0))
                 round_options = [r["name"] for r in rounds_list]
-                selected_round_name = st.selectbox("Runde auswählen:", round_options)
+                
+                if "persisted_round" not in st.session_state:
+                    saved_round = cookie_manager.get("selected_round")
+                    st.session_state.persisted_round = saved_round if saved_round in round_options else round_options[0]
+                
+                def update_round():
+                    st.session_state.persisted_round = st.session_state.selected_round_widget
+                    cookie_manager.set("selected_round", st.session_state.selected_round_widget, max_age=86400*7)
+                
+                selected_round_name = st.selectbox(
+                    "Runde auswählen:", 
+                    round_options, 
+                    index=round_options.index(st.session_state.persisted_round),
+                    key="selected_round_widget",
+                    on_change=update_round
+                )
             
                 players = tournament.get("players", [])
                 is_ryder_cup = tournament.get("is_ryder_cup", False)
@@ -934,13 +949,31 @@ elif page == "✍️ Scores eingeben":
                 else:
                     # Hole Selection
                     hole_numbers = [h["hole"] for h in course["holes"]]
-                    if "current_hole" not in st.session_state or st.session_state.current_hole not in hole_numbers:
+                    
+                    if "current_hole" not in st.session_state:
+                        saved_hole = cookie_manager.get("current_hole")
+                        try:
+                            saved_hole = int(saved_hole) if saved_hole else None
+                            if saved_hole in hole_numbers:
+                                st.session_state.current_hole = saved_hole
+                            else:
+                                st.session_state.current_hole = hole_numbers[0]
+                        except:
+                            st.session_state.current_hole = hole_numbers[0]
+                    elif st.session_state.current_hole not in hole_numbers:
                         st.session_state.current_hole = hole_numbers[0]
                     
-                    selected_hole_ui = st.selectbox("Loch direkt auswählen:", hole_numbers, index=hole_numbers.index(st.session_state.current_hole))
-                    if selected_hole_ui != st.session_state.current_hole:
-                        st.session_state.current_hole = selected_hole_ui
-                        st.rerun()
+                    def update_hole():
+                        st.session_state.current_hole = st.session_state.selected_hole_widget
+                        cookie_manager.set("current_hole", str(st.session_state.current_hole), max_age=86400*7)
+                    
+                    selected_hole_ui = st.selectbox(
+                        "Loch direkt auswählen:", 
+                        hole_numbers, 
+                        index=hole_numbers.index(st.session_state.current_hole),
+                        key="selected_hole_widget",
+                        on_change=update_hole
+                    )
                 
                     selected_hole = st.session_state.current_hole
                 
@@ -954,6 +987,7 @@ elif page == "✍️ Scores eingeben":
                             curr_idx = hole_numbers.index(st.session_state.current_hole)
                             if curr_idx > 0:
                                 st.session_state.current_hole = hole_numbers[curr_idx - 1]
+                                cookie_manager.set("current_hole", str(st.session_state.current_hole), max_age=86400*7)
                                 st.rerun()
                     with col_curr:
                         header_html = (
@@ -968,6 +1002,7 @@ elif page == "✍️ Scores eingeben":
                             curr_idx = hole_numbers.index(st.session_state.current_hole)
                             if curr_idx < len(hole_numbers) - 1:
                                 st.session_state.current_hole = hole_numbers[curr_idx + 1]
+                                cookie_manager.set("current_hole", str(st.session_state.current_hole), max_age=86400*7)
                                 st.rerun()
                     st.markdown("<hr style='border-color: #f1cf6d; margin: 10px 0;'>", unsafe_allow_html=True)
                 
