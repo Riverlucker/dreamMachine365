@@ -26,11 +26,27 @@ css_path = os.path.join(os.path.dirname(__file__), "style.css")
 if os.path.exists(css_path):
     local_css(css_path)
 
-# Initialize Session State
+# Initialize Session State and Cookies
+from streamlit_cookies_controller import CookieController
+cookie_controller = CookieController()
+
 if "is_admin" not in st.session_state:
     st.session_state["is_admin"] = False
 if "is_scorer" not in st.session_state:
     st.session_state["is_scorer"] = False
+
+# Try to load from cookies if session state is empty (useful on page reload)
+admin_cookie = cookie_controller.get("is_admin") == "true"
+if admin_cookie and not st.session_state.get("is_admin"):
+    st.session_state["is_admin"] = True
+
+scorer_cookie = cookie_controller.get("is_scorer") == "true"
+if scorer_cookie and not st.session_state.get("is_scorer"):
+    st.session_state["is_scorer"] = True
+
+scorer_name_cookie = cookie_controller.get("scorer_name")
+if scorer_name_cookie and not st.session_state.get("scorer_name"):
+    st.session_state["scorer_name"] = scorer_name_cookie
 
 # Get and sanitize event ID from query parameters
 import re
@@ -64,7 +80,15 @@ with col2:
         if st.button("Abmelden", use_container_width=True):
             st.session_state["is_admin"] = False
             st.session_state["is_scorer"] = False
+            cookie_controller.remove("is_admin")
+            cookie_controller.remove("is_scorer")
+            cookie_controller.remove("scorer_name")
             st.rerun()
+
+# Fix for Scorecard persisting when switching tabs
+if page != "🏆 Leaderboard":
+    if 'v_player' in st.query_params: del st.query_params['v_player']
+    if 'v_round' in st.query_params: del st.query_params['v_round']
 
 st.markdown("<hr style='margin-top: 5px; margin-bottom: 15px;'/>", unsafe_allow_html=True)
 
@@ -91,16 +115,21 @@ def check_password(role="scorer"):
             
         if role == "admin" and entered_password == admin_pwd_correct:
             st.session_state["is_admin"] = True
+            cookie_controller.set("is_admin", "true", max_age=86400*7)
             st.success("Erfolgreich als Admin angemeldet!")
             st.rerun()
         elif role == "scorer" and entered_password == score_pwd_correct:
             st.session_state["is_scorer"] = True
             st.session_state["scorer_name"] = entered_username.strip()
+            cookie_controller.set("is_scorer", "true", max_age=86400*7)
+            cookie_controller.set("scorer_name", entered_username.strip(), max_age=86400*7)
             st.success("Erfolgreich für Score-Eingabe angemeldet!")
             st.rerun()
         elif role == "scorer" and entered_password == admin_pwd_correct:
             st.session_state["is_admin"] = True
             st.session_state["scorer_name"] = entered_username.strip()
+            cookie_controller.set("is_admin", "true", max_age=86400*7)
+            cookie_controller.set("scorer_name", entered_username.strip(), max_age=86400*7)
             st.success("Erfolgreich als Admin angemeldet!")
             st.rerun()
         else:
