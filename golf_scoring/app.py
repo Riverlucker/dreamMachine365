@@ -27,24 +27,40 @@ if os.path.exists(css_path):
     local_css(css_path)
 
 # Initialize Session State and Cookies
-from streamlit_cookies_controller import CookieController
-cookie_controller = CookieController()
+import extra_streamlit_components as stx
+
+@st.cache_resource(experimental_allow_widgets=True)
+def get_manager():
+    return stx.CookieManager(key="cookie_manager")
+
+cookie_manager = get_manager()
+
+# Wait for cookies to be loaded on first render
+if not cookie_manager.get_all():
+    pass
 
 if "is_admin" not in st.session_state:
     st.session_state["is_admin"] = False
 if "is_scorer" not in st.session_state:
     st.session_state["is_scorer"] = False
 
+# Fallback auth token via query params to prevent login flashes
+url_auth = st.query_params.get("auth", "")
+if url_auth == "admin":
+    st.session_state["is_admin"] = True
+elif url_auth == "scorer":
+    st.session_state["is_scorer"] = True
+
 # Try to load from cookies if session state is empty (useful on page reload)
-admin_cookie = cookie_controller.get("is_admin") == "true"
+admin_cookie = cookie_manager.get("is_admin") == "true"
 if admin_cookie and not st.session_state.get("is_admin"):
     st.session_state["is_admin"] = True
 
-scorer_cookie = cookie_controller.get("is_scorer") == "true"
+scorer_cookie = cookie_manager.get("is_scorer") == "true"
 if scorer_cookie and not st.session_state.get("is_scorer"):
     st.session_state["is_scorer"] = True
 
-scorer_name_cookie = cookie_controller.get("scorer_name")
+scorer_name_cookie = cookie_manager.get("scorer_name")
 if scorer_name_cookie and not st.session_state.get("scorer_name"):
     st.session_state["scorer_name"] = scorer_name_cookie
 
@@ -80,9 +96,11 @@ with col2:
         if st.button("Abmelden", use_container_width=True):
             st.session_state["is_admin"] = False
             st.session_state["is_scorer"] = False
-            cookie_controller.remove("is_admin")
-            cookie_controller.remove("is_scorer")
-            cookie_controller.remove("scorer_name")
+            if 'auth' in st.query_params: del st.query_params['auth']
+            cookie_manager.delete("is_admin")
+            cookie_manager.delete("is_scorer")
+            cookie_manager.delete("scorer_name")
+            cookie_manager.delete("selected_players")
             st.rerun()
 
 # Fix for Scorecard persisting when switching tabs
@@ -115,21 +133,24 @@ def check_password(role="scorer"):
             
         if role == "admin" and entered_password == admin_pwd_correct:
             st.session_state["is_admin"] = True
-            cookie_controller.set("is_admin", "true", max_age=86400*7)
+            st.query_params["auth"] = "admin"
+            cookie_manager.set("is_admin", "true", max_age=86400*7)
             st.success("Erfolgreich als Admin angemeldet!")
             st.rerun()
         elif role == "scorer" and entered_password == score_pwd_correct:
             st.session_state["is_scorer"] = True
             st.session_state["scorer_name"] = entered_username.strip()
-            cookie_controller.set("is_scorer", "true", max_age=86400*7)
-            cookie_controller.set("scorer_name", entered_username.strip(), max_age=86400*7)
+            st.query_params["auth"] = "scorer"
+            cookie_manager.set("is_scorer", "true", max_age=86400*7)
+            cookie_manager.set("scorer_name", entered_username.strip(), max_age=86400*7)
             st.success("Erfolgreich für Score-Eingabe angemeldet!")
             st.rerun()
         elif role == "scorer" and entered_password == admin_pwd_correct:
             st.session_state["is_admin"] = True
             st.session_state["scorer_name"] = entered_username.strip()
-            cookie_controller.set("is_admin", "true", max_age=86400*7)
-            cookie_controller.set("scorer_name", entered_username.strip(), max_age=86400*7)
+            st.query_params["auth"] = "admin"
+            cookie_manager.set("is_admin", "true", max_age=86400*7)
+            cookie_manager.set("scorer_name", entered_username.strip(), max_age=86400*7)
             st.success("Erfolgreich als Admin angemeldet!")
             st.rerun()
         else:
@@ -873,11 +894,24 @@ elif page == "✍️ Scores eingeben":
             
                 if not is_ryder_cup:
                     player_names = [p["name"] for p in players]
+                    
                     if "persisted_selected_players" not in st.session_state:
-                        st.session_state.persisted_selected_players = player_names
+                        saved_players_json = cookie_manager.get("selected_players")
+                        if saved_players_json:
+                            try:
+                                import json
+                                saved_players = json.loads(saved_players_json)
+                                saved_players = [p for p in saved_players if p in player_names]
+                                st.session_state.persisted_selected_players = saved_players if saved_players else player_names
+                            except:
+                                st.session_state.persisted_selected_players = player_names
+                        else:
+                            st.session_state.persisted_selected_players = player_names
                     
                     def update_selected_players():
                         st.session_state.persisted_selected_players = st.session_state.selected_players_widget
+                        import json
+                        cookie_manager.set("selected_players", json.dumps(st.session_state.selected_players_widget), max_age=86400*7)
                     
                     selected_player_names = st.multiselect(
                         "Welche Spieler möchtest du erfassen?", 
