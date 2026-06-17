@@ -286,6 +286,8 @@ def show_scorecard_page(p_id, r_id, tournament_data, scores_data, courses_cache_
 
 # ----------------- 🏆 LEADERBOARD PAGE -----------------
 if page == "🏆 Leaderboard":
+    auth_param = st.query_params.get("auth", "")
+    auth_str = f"&auth={auth_param}" if auth_param else ""
     st.title(f"🏆 {tournament.get('tournament_name', 'GolfScore Live')}")
     
     # Load latest tournament data & scores
@@ -531,14 +533,14 @@ if page == "🏆 Leaderboard":
                                     r_stats = p["rounds"].get(r["id"], {})
                                     pts = r_stats.get("net_points", 0)
                                     holes = r_stats.get("holes_played", 0)
-                                    link = f"?event={event_id}&v_player={p['id']}&v_round={r['id']}&v_type=netto"
+                                    link = f"?event={event_id}&v_player={p['id']}&v_round={r['id']}&v_type=netto{auth_str}"
                                     html_details += f"<td><a href='{link}' target='_self' style='text-decoration:none; color:inherit; display:block;'>{pts} <span style='font-size:0.75rem; color:#888;'>({holes}L)</span></a></td>"
                                 html_details += f"<td><strong>{p['total_net_points']}</strong></td>"
                             else:
                                 r_stats = p["rounds"].get(active_round["id"], {})
                                 pts = r_stats.get("net_points", 0)
                                 holes = r_stats.get("holes_played", 0)
-                                link = f"?event={event_id}&v_player={p['id']}&v_round={active_round['id']}&v_type=netto"
+                                link = f"?event={event_id}&v_player={p['id']}&v_round={active_round['id']}&v_type=netto{auth_str}"
                                 html_details += f"<td><a href='{link}' target='_self' style='text-decoration:none; color:inherit; display:block;'><strong>{pts}</strong> <span style='font-size:0.75rem; color:#888;'>({holes}L)</span></a></td>"
                             html_details += "</tr>"
                         html_details += "</tbody></table></div>"
@@ -631,7 +633,7 @@ if page == "🏆 Leaderboard":
                     
                     # Use the team color as a background for the player name
                     name_html = f"<span style='background-color:{team_color}; color:{text_color}; display:block; text-align:center; padding:4px 6px; border-radius:6px; border:1px solid rgba(0,0,0,0.1); font-weight:bold; line-height:1.2;'>{name_display}</span>"
-                    name_link = f"?event={event_id}&v_player={p['id']}&v_round={p_active_r_id}&v_type=netto"
+                    name_link = f"?event={event_id}&v_player={p['id']}&v_round={p_active_r_id}&v_type=netto{auth_str}"
                     
                     html += f"<td><a href='{name_link}' target='_self' style='text-decoration:none;'>{name_html}</a></td>"
                     html += f"<td>{p['handicap']}</td>"
@@ -641,11 +643,11 @@ if page == "🏆 Leaderboard":
                             r_stats = p["rounds"].get(r["id"], {})
                             pts = r_stats.get("net_points", 0)
                             h = r_stats.get("holes_played", 0)
-                            link = f"?event={event_id}&v_player={p['id']}&v_round={r['id']}&v_type=netto"
+                            link = f"?event={event_id}&v_player={p['id']}&v_round={r['id']}&v_type=netto{auth_str}"
                             html += f"<td><a href='{link}' target='_self' style='text-decoration:none; color:inherit; display:block;'>{pts} <span style='font-size:0.75rem; color:#888;'>({h}L)</span></a></td>"
                         html += f"<td><strong>{total_pts}</strong></td>"
                     else:
-                        link = f"?event={event_id}&v_player={p['id']}&v_round={active_round['id']}&v_type=netto"
+                        link = f"?event={event_id}&v_player={p['id']}&v_round={active_round['id']}&v_type=netto{auth_str}"
                         html += f"<td><a href='{link}' target='_self' style='text-decoration:none; color:inherit; display:block;'><strong>{total_pts}</strong></a></td>"
                     
                     holes_str = f"{holes_played} / {max_holes_player}"
@@ -743,7 +745,7 @@ if page == "🏆 Leaderboard":
                     name_display = p['name'].replace(' ', '<br>', 1)
                     
                     name_html = f"<span style='background-color:{team_color}; color:{text_color}; display:block; text-align:center; padding:4px 6px; border-radius:6px; border:1px solid rgba(0,0,0,0.1); font-weight:bold; line-height:1.2;'>{name_display}</span>"
-                    name_link = f"?event={event_id}&v_player={p['id']}&v_round={p_active_r_id}&v_type=brutto"
+                    name_link = f"?event={event_id}&v_player={p['id']}&v_round={p_active_r_id}&v_type=brutto{auth_str}"
                     
                     html += f"<td><a href='{name_link}' target='_self' style='text-decoration:none;'>{name_html}</a></td>"
                     html += f"<td>{p['handicap']}</td>"
@@ -753,11 +755,11 @@ if page == "🏆 Leaderboard":
                             r_stats = p["rounds"].get(r["id"], {})
                             pts = r_stats.get("gross_points", 0)
                             h = r_stats.get("holes_played", 0)
-                            link = f"?event={event_id}&v_player={p['id']}&v_round={r['id']}&v_type=brutto"
+                            link = f"?event={event_id}&v_player={p['id']}&v_round={r['id']}&v_type=brutto{auth_str}"
                             html += f"<td><a href='{link}' target='_self' style='text-decoration:none; color:inherit; display:block;'>{pts} <span style='font-size:0.75rem; color:#888;'>({h}L)</span></a></td>"
                         html += f"<td><strong>{total_pts}</strong></td>"
                     else:
-                        link = f"?event={event_id}&v_player={p['id']}&v_round={active_round['id']}&v_type=brutto"
+                        link = f"?event={event_id}&v_player={p['id']}&v_round={active_round['id']}&v_type=brutto{auth_str}"
                         html += f"<td><a href='{link}' target='_self' style='text-decoration:none; color:inherit; display:block;'><strong>{total_pts}</strong></a></td>"
                     
                     holes_str = f"{holes_played} / {max_holes_player}"
