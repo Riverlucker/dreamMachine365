@@ -913,13 +913,22 @@ elif page == "✍️ Scores eingeben":
                     player_names = [p["name"] for p in players]
                     
                     if "persisted_selected_players" not in st.session_state:
-                        saved_players_json = cookie_manager.get("selected_players")
-                        if saved_players_json:
+                        saved_players_data = cookie_manager.get("selected_players")
+                        if saved_players_data is not None:
                             try:
                                 import json
-                                saved_players = json.loads(saved_players_json)
-                                saved_players = [p for p in saved_players if p in player_names]
-                                st.session_state.persisted_selected_players = saved_players if saved_players else player_names
+                                if isinstance(saved_players_data, str):
+                                    saved_players = json.loads(saved_players_data)
+                                    if isinstance(saved_players, str):
+                                        saved_players = json.loads(saved_players)
+                                else:
+                                    saved_players = saved_players_data
+                                    
+                                if isinstance(saved_players, list):
+                                    valid_players = [p for p in saved_players if p in player_names]
+                                    st.session_state.persisted_selected_players = valid_players if valid_players else player_names
+                                else:
+                                    st.session_state.persisted_selected_players = player_names
                             except:
                                 st.session_state.persisted_selected_players = player_names
                         else:
